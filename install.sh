@@ -8,6 +8,13 @@
 # python2 with pynvim (for auto-install lua packages within nvim)
 #   python3 -m pip install --user --upgrade pynvim
 #   sudo apt-get install python
+# ripgrep for live fuzzy searching
+#   sudo apt-get install ripgrep
+# nodejs 16 & eslint
+#   sudo apt update
+#   curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
+#   sudo apt install -y nodejs
+#   sudo npm install -g eslint
 
 # Please pay extra attention to nvim.d/my/keymap.lua, some builtin keymaps are cancelled on purpose.
 # Please fork this repo, modify to fit your habit.
