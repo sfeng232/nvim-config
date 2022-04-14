@@ -9,6 +9,9 @@
 #   python3 -m pip install --user --upgrade pynvim
 #   sudo apt-get install python
 
+# Please pay extra attention to nvim.d/my/keymap.lua, some builtin keymaps are cancelled on purpose.
+# Please fork this repo, modify to fit your habit.
+
 ln -s `pwd`/vimrc.lua ~/.config/nvim/init.lua
 ln -s `pwd`/nvim.d ~/.config/nvim/lua
 ln -s `pwd`/UltiSnips ~/.config/nvim/UltiSnips
