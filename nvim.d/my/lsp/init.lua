@@ -29,6 +29,8 @@ lsp_installer.on_server_ready(function(server)
     capabilities = cmp_nvim_lsp.update_capabilities(capabilities),
   }
 
+  -- refs for all LSP servers
+  -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
   if (server.name == "grammarly") then
     opts.filetypes = { "markdown", "rst", "html", "lokinote" }
   end
