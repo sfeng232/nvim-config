@@ -12,7 +12,7 @@
 # Please pay extra attention to nvim.d/my/keymap.lua, some builtin keymaps are cancelled on purpose.
 # Please fork this repo, modify to fit your habit.
 
-# Icons
+# Icons provided by Fonts (Nerd Fonts)
 # access https://www.nerdfonts.com/font-downloads
 # download and unzip the one you like (I use MPlus Nerd Font)
 # mv 'M+ 1mn light Nerd Font Complete Mono.ttf' ~/.local/share/fonts
