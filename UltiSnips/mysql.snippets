@@ -1,0 +1,58 @@
+snippet /sel/ "select query" r
+select ${1:*} from ${0:table};
+endsnippet
+
+snippet /selid/ "select query by id" r
+select ${1:*} from ${2:table} where id=$0;
+endsnippet
+
+snippet /up/ "update query" r
+update ${1:table} set ${2:name}=${3:value};
+endsnippet
+
+snippet /del/ "delete query" r
+delete from ${0:table};
+endsnippet
+
+snippet in "insert" b
+insert into ${1:table} (${2:name,code,type}) values (${3:'name','code','type'});
+endsnippet
+
+snippet alter "alter table" b
+alter table ${1:table_name} modify ${2:col_name} varchar(255) not null;
+endsnippet
+
+snippet st "Show tables" b
+show tables;
+endsnippet
+
+snippet null "nullable" b
+ALTER TABLE ${1:table} MODIFY ${0:column} VARCHAR(255);
+endsnippet
+
+snippet drop "drop a column" b
+alter table ${1:table_name} drop ${0:column};
+endsnippet
+
+snippet drop "drop a table" b
+drop table ${1:table_name};
+endsnippet
+
+snippet default "change default value of a field" b
+alter table ${1:table_name} modify ${2:field} ${3:datetime} ${4:null} default ${5:default};
+endsnippet
+
+snippet like "like pattern"
+like "%$1%"$0
+endsnippet
+
+
+snippet puppet_uuid "puppet_uuid" b
+select id, name, puppet_uuid from servers order by id desc limit 5;
+endsnippet
+
+snippet delce "delete ce workloads" b
+delete from servers;
+delete from tiers;
+delete from workloads;
+endsnippet

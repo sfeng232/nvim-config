@@ -1,0 +1,15 @@
+extends sh
+
+snippet mipgh "mix phoenix generate html" b
+mix phoenix.gen.html ${0:User} users name:string
+mix phoenix.gen.html Step steps name:string scenario_id:references:scenario
+endsnippet
+
+snippet miem "mix ecto migrate" b
+mix ecto.migrate
+endsnippet
+
+snippet mipr "mix phoenix.routes" b
+mix phoenix.routes
+endsnippet
+

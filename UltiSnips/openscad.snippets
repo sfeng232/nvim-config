@@ -1,0 +1,21 @@
+snippet cube "cube" b
+cube([${1:w}, ${2:h}, ${3:d}]);
+endsnippet
+
+snippet t "translate" b
+translate([${1:x}, ${2:y}, ${3:z}])
+endsnippet
+
+snippet r "rotate" b
+rotate([${1:x}, ${2:y}, ${3:z}])
+endsnippet
+
+snippet cyl "cylinder" b
+cylinder(r = $1, h = $2, $fn = 100);
+endsnippet
+
+snippet module "module" b
+module $1() {
+	${VISUAL}
+}
+endsnippet
