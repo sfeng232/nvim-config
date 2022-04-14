@@ -30,6 +30,10 @@ lsp_installer.on_server_ready(function(server)
     capabilities = cmp_nvim_lsp.update_capabilities(capabilities),
   }
 
+  if (server.name == "grammarly") then
+    opts.filetypes = { "markdown", "rst", "html", "lokinote" }
+  end
+
   if server.name == "tsserver" then
     local tsserver_opts = require("my.lsp.tsserver")
     opts = vim.tbl_deep_extend("keep", tsserver_opts, opts)
