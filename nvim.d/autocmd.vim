@@ -67,3 +67,8 @@ function! TabdoChecktime()
   tabdo checktime
   set confirm
 endfunction
+
+augroup lokinote
+  au! BufNewFile,BufRead *.ln set filetype=lokinote
+  au! FileType lokinote so ~/.config/nvim/lua/lokinote.vim
+augroup end

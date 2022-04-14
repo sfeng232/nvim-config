@@ -17,7 +17,6 @@ local on_attach = function(client, bufnr)
   map(bufnr, "n", "<c-l>", '<cmd>lua vim.diagnostic.goto_next({ float = false })<cr>', opts)
   map(bufnr, "n", "<c-[>", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
   map(bufnr, "n", "<c-]>", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>", opts)
-  -- map(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
   map(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
   map(bufnr, "n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 end
