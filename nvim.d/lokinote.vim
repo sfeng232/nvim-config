@@ -10,12 +10,12 @@ syntax match h6 "^ \{10\}.*$"
 
 " setup the highlighting links
 
-hi link h1 PreCondit
-hi link h2 String
-hi link h3 Type
-hi link h4 Function
-hi link h5 Identifier
-hi link h6 Keyword
+hi h1 guifg=#4fc3f7
+hi h2 guifg=#dce775
+hi h3 guifg=#4db6ac
+hi h4 guifg=#ff8a65
+hi h5 guifg=#90a4ae
+hi h6 guifg=#e57373
 
 " key mappings
 nnoremap <buffer> <silent> vv :call SelectIndent(1)<cr>k

@@ -53,11 +53,13 @@ packer.init {
 packer.startup(function(use, use_rocks)
   use_rocks 'lua-cjson'
 
-  use "wbthomason/packer.nvim" -- Have packer manage itself
-  use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
-  use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
+  use "wbthomason/packer.nvim"          -- Have packer manage itself
+  use "nvim-lua/popup.nvim"             -- An implementation of the Popup API from vim in Neovim
+  use "nvim-lua/plenary.nvim"           -- Useful lua functions used ny lots of plugins
   use 'antoinemadec/FixCursorHold.nvim'
   use "tpope/vim-repeat"
+  use "triglav/vim-visual-increment"    -- increase numbers on multiple lines at once
+  use "tomtom/tlib_vim"                 -- provided string#Strip, used in the lokinote bullet style switching shortcut
 
   -- which key
   use "folke/which-key.nvim"
