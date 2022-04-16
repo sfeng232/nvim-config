@@ -72,15 +72,7 @@ for _, sign in ipairs(signs) do
 end
 
 vim.diagnostic.config({
-  virtual_text = {
-    source = "always",
-    prefix = '▎',
-  },
-  signs = {
-    active = signs,
-  },
   update_in_insert = false,
-  underline = true,
   severity_sort = true,
   float = {
     focusable = false,
@@ -91,6 +83,41 @@ vim.diagnostic.config({
     prefix = "",
   },
 })
+
+local lsp_is_on = true
+
+_G.turn_off_lsp = function()
+  lsp_is_on = false
+  vim.diagnostic.config {
+    virtual_text = false,
+    signs = false,
+    underline = false,
+  }
+end
+
+_G.turn_on_lsp = function()
+  lsp_is_on = true
+  vim.diagnostic.config({
+    virtual_text = {
+      source = "always",
+      prefix = '▎',
+    },
+    signs = {
+      active = signs,
+    },
+    underline = true,
+  })
+end
+
+_G.toggle_lsp = function()
+  if lsp_is_on == true then
+    _G.turn_off_lsp()
+  else
+    _G.turn_on_lsp()
+  end
+end
+
+_G.turn_on_lsp()
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
   border = "rounded",
