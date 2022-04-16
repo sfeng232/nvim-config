@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 
 # Prerequisite
-# neovim 6.1+
-#   download nvim.appimage from https://github.com/neovim/neovim/releases/tag/v0.6.1
+# neovim 7.0
+#   download nvim.appimage from https://github.com/neovim/neovim/releases/tag/v0.7.0
 #   sudo mv nvim.appimage /usr/local/bin/nvim
 #   sudo chmod +x /usr/local/bin/nvim
-# python2 with pynvim (for auto-install lua packages within nvim)
+# pynvim for auto-install lua packages within nvim
 #   python3 -m pip install --user --upgrade pynvim
-#   sudo apt-get install python
 # ripgrep for live fuzzy searching
 #   sudo apt-get install ripgrep
 # nodejs 16 & eslint
