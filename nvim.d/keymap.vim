@@ -152,6 +152,7 @@ function! MoveFile()
   let fullpath = expand('%')
   let newpath = input('Move file to: ', fullpath)
   exe "! mv " . fullpath . " " . newpath
+  exe "bwipeout"
   exe "edit " . newpath
   redraw!
 endfunction
