@@ -50,4 +50,10 @@ M.send_highlighted_lines = function()
   M.send_line_to_next_pane(line)
 end
 
+M.run_popup = function(cmd)
+  local cwd = vim.fn.getcwd()
+  local fullcmd = "cd " .. cwd .. "; [ -f .envrc ] && source .envrc; " .. cmd
+  M.run_shell("tmux popup bash -ic '" .. fullcmd .. "'")
+end
+
 return M
