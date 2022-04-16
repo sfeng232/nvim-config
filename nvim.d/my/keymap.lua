@@ -1,6 +1,6 @@
 local opts = { noremap = true, silent = true }
 -- local term_opts = { silent = true }
-local map = vim.api.nvim_set_keymap
+local map = vim.keymap.set
 local cancel = function(tbl, keys)
   for i, k in pairs(keys) do
     map(tbl, k, "<nop>", opts)
@@ -25,19 +25,15 @@ map("n", "hj", "/", {noremap = true})
 map("n", "HJ", "?", {noremap = true})
 map("n", "x", '"_x', opts)
 map("n", "<m-a>", "ggVG", opts)
-
--- map("n", "<m-h>", ":tabp<cr>", opts)
--- map("n", "<m-l>", ":tabn<cr>", opts)
--- map("n", "qf", ":q<cr>", opts)
 map("n", "<m-h>", ":BufferLineCyclePrev<cr>", opts)
 map("n", "<m-l>", ":BufferLineCycleNext<cr>", opts)
--- nnoremap <silent><mymap> :BufferLineMoveNext<CR>
--- nnoremap <silent><mymap> :BufferLineMovePrev<CR>
+map("n", "<leader><m-h>", ":BufferLineMovePrev<cr>", opts)
+map("n", "<leader><m-l>", ":BufferLineMoveNext<cr>", opts)
 map("n", "<m-b>", "<cmd>Telescope buffers theme=dropdown<cr>", opts)
 map("n", "qf", "<cmd>bwipeout<cr>", opts)
 map("n", "<leader>cl", ":let @+ = expand('%:p')<cr>", opts)     -- copy current file path to clipboard
-map("n", "ss", '<cmd>lua require("my.send").send_current_line()<cr>', opts)
-map("n", "sb", '<cmd>lua require("my.send").send_last_line()<cr>', opts)
+map("n", "ss", require("my.send").send_current_line, opts)
+map("n", "sb", require("my.send").send_last_line, opts)
 map("n", "gV", '`[v`]', opts)
 map("n", "<leader>ps", ':PackerSync<cr>', opts)
 map("n", "hl", "<cmd>Telescope find_files<cr>", opts)
