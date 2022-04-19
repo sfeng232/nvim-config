@@ -9,6 +9,9 @@ comment.setup {
     extra = false,
     extended = false,
   },
+  toggler = {
+    line = 'sf',
+  },
   pre_hook = function(ctx)
     local U = require "Comment.utils"
 
