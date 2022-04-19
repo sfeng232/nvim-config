@@ -1,8 +1,9 @@
 How to use this repo
   fork it
-  in nvim.d/my/keymap.lua, comment out every lines start with "cancel"
+  in nvim.d/my/keymap.lua, comment out lines started with "cancel"
   prepare the environment according to the following 2 sessions
   run ./install.sh
+  read every files, modify and experiment
 
 Environment
   neovim 7.0
