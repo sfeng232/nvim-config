@@ -35,6 +35,10 @@ lsp_installer.on_server_ready(function(server)
     opts.filetypes = { "markdown", "rst", "html", "lokinote" }
   end
 
+  if server.name == "ltex" then
+    opts.filetypes = { "lokinote", "bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb", "tex" }
+  end
+
   if server.name == "tsserver" then
     local tsserver_opts = require("my.lsp.tsserver")
     opts = vim.tbl_deep_extend("keep", tsserver_opts, opts)
