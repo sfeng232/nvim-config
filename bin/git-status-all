@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# set -x
+
+projs="$(fdfind -H "^project.vim" $HOME | sed -e 's|/\.devbase.*||' -e 's|/project.vim||' -e "s|$HOME/||")"
+
+for base in $projs; do
+  if [[ -d $base/.git ]]; then
+    if git -C $HOME/$base status 2>/dev/null | grep -q "Changes"; then
+      echo $base
+    fi
+  fi
+done

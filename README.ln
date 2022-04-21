@@ -23,8 +23,14 @@ Environment
     mac
       xcode-select --install
 
-  ripgrep for live fuzzy searching
+  ripgrep: for live fuzzy searching
     sudo apt-get install ripgrep
+
+  fdfind: for searching files by name
+    sudo apt-get install fdfind
+
+  fzf: for project switching (tmux)
+    sudo apt-get install fzf
 
   tmux 3.2
     sudo apt-get remove tmux

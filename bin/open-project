@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# set -x
+
+# search project.vim and .devbase/project.vim from $HOME
+# ask with fzf, open or focus the picked project
+
+# Prerequisite
+# tmux 3.2+
+# fdfind & fzf
+#     sudo apt-get install fdfind fzf
+
+# move up/down:  m-k / m-j
+# accept:        c-j
+
+projs="$(fdfind -H "^project.vim" $HOME | sed -e 's|/\.devbase.*||' -e 's|/project.vim||' -e "s|$HOME/||")"
+picked="$(echo "$projs" | sort -r | fzf-tmux-popup -p -w 50% -h 38% -m)"
+
+if [[ "$picked" = "" ]]; then
+  exit 0
+fi
+
+projName="$(echo "$picked" | cut -d'/' -f2)"
+
+if ! tmux list-windows -F "#W" | grep -q "^${projName}$"; then
+  cmd="cd $HOME/$picked ; zsh -ic '[ -f .envrc ] && source .envrc; TERM=screen-256color nvim'"
+  tmux new-window -n $projName "$cmd"
+fi
+
+tmux switch-client
+tmux select-window -t $projName
