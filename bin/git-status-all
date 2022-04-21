@@ -10,3 +10,6 @@ for base in $projs; do
     fi
   fi
 done
+
+echo
+echo "- done scanning, C-C to close -"
