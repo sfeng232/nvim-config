@@ -14,6 +14,10 @@
 
 input="$1"
 
+if tmux list-windows -F "#W" | grep -q "^${input}$"; then
+  tmux select-window -t $input
+fi
+
 projs="$(fdfind -H "^project.vim" $HOME | sed -e 's|/\.devbase.*||' -e 's|/project.vim||' -e "s|$HOME/||")"
 
 if [[ "$input" = "" ]]; then
