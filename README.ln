@@ -5,6 +5,14 @@ How to use this repo
   run ./install.sh
   read every files, modify and experiment
 
+General key bindings (applied to both vim and tmux)
+  Ctrl-j         = accept / confirm / open (similar to <cr>)
+  Alt-j / k      = move in finder (nvim-cmp, telescope, and fzf)
+  Alt-H / L      = move in tmux windows
+  Alt-J / K      = move in tmux panes
+  Alt-j / k      = move in vim buffers
+  Ctrl-c         = cancel / exit in zsh, vim, and tmux
+
 Environment
   neovim 0.7
     download nvim.appimage from https://github.com/neovim/neovim/releases/tag/v0.7.0
