@@ -12,11 +12,18 @@
 # move up/down:  m-k / m-j
 # accept:        c-j
 
-projs="$(fdfind -H "^project.vim" $HOME | sed -e 's|/\.devbase.*||' -e 's|/project.vim||' -e "s|$HOME/||")"
-picked="$(echo "$projs" | sort -r | fzf-tmux-popup -p -w 50% -h 38% -m)"
+input="$1"
 
-if [[ "$picked" = "" ]]; then
-  exit 0
+projs="$(fdfind -H "^project.vim" $HOME | sed -e 's|/\.devbase.*||' -e 's|/project.vim||' -e "s|$HOME/||")"
+
+if [[ "$input" = "" ]]; then
+  picked="$(echo "$projs" | sort -r | fzf-tmux-popup -p -w 50% -h 38% -m)"
+
+  if [[ "$picked" = "" ]]; then
+    exit 0
+  fi
+else
+  picked="$(echo "$projs" | grep "$input")"
 fi
 
 projName="$(echo "$picked" | cut -d'/' -f2)"
