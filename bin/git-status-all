@@ -5,7 +5,7 @@ projs="$(fdfind -H "^project.vim" $HOME | sed -e 's|/\.devbase.*||' -e 's|/proje
 
 for base in $projs; do
   if [[ -d $base/.git ]]; then
-    if git -C $HOME/$base status 2>/dev/null | grep -q "Changes"; then
+    if git -C $HOME/$base status 2>/dev/null | grep -q "Changes\|Untracked"; then
       echo $base
     fi
   fi

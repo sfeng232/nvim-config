@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+tmux has-session -t main
+
+if [ $? -ne 0 ] ; then
+  tmux new-session -s main
+else
+  # preempt
+  tmux detach -a -s main
+  tmux at -t main
+fi
