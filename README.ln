@@ -35,7 +35,7 @@ Environment
     sudo apt-get install ripgrep
 
   fdfind: for searching files by name
-    sudo apt-get install fdfind
+    sudo apt-get install fd-find
 
   fzf: for project switching (tmux)
     sudo apt-get install fzf
