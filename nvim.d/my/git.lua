@@ -62,12 +62,12 @@ local map = vim.api.nvim_set_keymap
 map("n", "gh", ":call system('gitk')<cr>", opts)
 map("n", "gH", ":call system('gitk ' . expand('%'))<cr>", opts)
 map("n", "gs", "<cmd>Telescope git_status<cr>", opts)
-map("n", "gu", "<cmd>call TmuxExecWithRead('echo pulling...; git pull')<cr>", opts)
+map("n", "gu", "<cmd>call TmuxPopup('echo git pull...; git pull; any-key')<cr>", opts)
 map("n", "gd", "<cmd>call GitDiff()<cr>", opts)
 map("n", "gi", "<cmd>call GitCommit()<cr>", opts)
 vim.cmd [[
-  function! TmuxExecWithRead(cmd)
-    call system("tmux splitw \"zsh -c '" . a:cmd . "'; any-key\"")
+  function! TmuxPopup(cmd)
+    call system("tmux popup -E \"zsh -c 'cd `pwd`; pwd;" . a:cmd . "'\"")
   endfunction
 
   function! GitDiff()

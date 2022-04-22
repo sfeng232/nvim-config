@@ -14,5 +14,4 @@ for base in $projs; do
   fi
 done
 
-echo
-read -n 1 -s -r -p '- Press any key to continue -'
+any-key
