@@ -11,6 +11,8 @@ General key bindings (applied to both vim and tmux)
   Alt-H / L      = move in tmux windows
   Alt-J / K      = move in tmux panes
   Alt-j / k      = move in vim buffers
+  Ctrl-h / l     = LSP prev issue / next issue
+  gj / gk        = git next hunk / prev hunk
   Ctrl-c         = cancel / exit in zsh, vim, and tmux
 
 Environment
