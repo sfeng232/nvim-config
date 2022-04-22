@@ -5,7 +5,7 @@
 # best fit for ubuntu 20.04 shortcut
 # open Settings > Keyboard Shortcuts > add custom shortcut
 #    key: Ctrl + Space
-#    command: zsh -c "source .zshrc; simple-toggle"
+#    command: Absolute path of this script
 
 current="$(xdotool getwindowfocus getwindowname)"
 nextid="$(wmctrl -l | grep -v ' 1 ' | grep -vF "$current" | cut -d ' ' -f1 | head -n 1)"
