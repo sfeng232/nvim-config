@@ -43,7 +43,9 @@ map("n", "<c-t>", "<cmd>NvimTreeToggle<cr>", opts)
 map("n", "<leader>t", "<cmd>TSPlaygroundToggle<cr>", opts)
 map("n", "<leader>hg", '<cmd>echo synIDattr(synID(line("."),col("."),1),"name")<cr>', opts)
 map("n", "<leader>tl", '<cmd>lua toggle_lsp()<cr>', opts)
-cancel("n", {">>", "<<", ":", "/", "?", "Q", "qq", "<bs>", "<del>", "<cr>", "<up>", "<down>", "<left>", "<right>"})
+map("n", "c*", '*Ncgn', opts)
+map("n", "d*", '*Ndgn', opts)
+cancel("n", {">>", "<<", ":", "/", "?", "Q", "qq", "<bs>", "<del>", "<cr>", "<up>", "<down>", "<left>", "<right>", "cgn", "dgn"})
 -- map("n", "<C-h>", "<C-w>h", opts)    -- switch window
 -- map("n", "<C-l>", "<C-w>l", opts)
 
