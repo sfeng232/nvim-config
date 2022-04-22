@@ -171,3 +171,7 @@ function! CloneSelection()
   exe "normal " . nend . "Go"
   exe "normal pV" . lines . "j"
 endfunction
+
+function! TmuxPopup(cmd)
+  call system("tmux popup -E \"zsh -c 'cd `pwd`; pwd; [ -f .envrc ] && source .envrc;" . a:cmd . "'\"")
+endfunction
