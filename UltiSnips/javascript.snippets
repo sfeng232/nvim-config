@@ -946,3 +946,18 @@ snippet throw "throw error" b
 /* eslint-disable no-unreachable */
 throw new Error("$0");
 endsnippet
+
+snippet pgtest "A quick playground for postgres" b
+\`
+	drop table if exists testtbl;
+	create table testtbl (
+		name text,
+		price int
+	);
+	insert into testtbl (name, price) values ('apple', '123');
+	select * from testtbl
+\`;
+\`
+	alter table testtbl drop column price
+\`;
+endsnippet
