@@ -43,8 +43,10 @@ map("n", "<c-t>", "<cmd>NvimTreeToggle<cr>", opts)
 map("n", "<leader>t", "<cmd>TSPlaygroundToggle<cr>", opts)
 map("n", "<leader>hg", '<cmd>echo synIDattr(synID(line("."),col("."),1),"name")<cr>', opts)
 map("n", "<leader>tl", '<cmd>lua toggle_lsp()<cr>', opts)
-map("n", "c*", '*Ncgn', opts)
+map("n", "c*", '*Ncgn', opts)        -- c* to edit word under cursor, repeatable by the dot key
 map("n", "d*", '*Ndgn', opts)
+map("n", "c.", '<cmd>let @/=@"<cr>/<cr>cgn<c-r>.<esc>', opts)       -- c. to make the last edit repeatable by dot
+map("n", "d.", '<cmd>let @/=@"<cr>/<cr>dgn<c-r>.<esc>', opts)
 cancel("n", {">>", "<<", ":", "/", "?", "Q", "qq", "<bs>", "<del>", "<cr>", "<up>", "<down>", "<left>", "<right>"})
 -- map("n", "<C-h>", "<C-w>h", opts)    -- switch window
 -- map("n", "<C-l>", "<C-w>l", opts)
@@ -64,7 +66,7 @@ map("v", "p", '"_dP', opts)
 map("v", "ss", '<esc><cmd>lua require("my.send").send_highlighted_lines()<cr>', opts)
 map("v", "sf", "<Plug>(comment_toggle_linewise_visual)", opts)
 map("v", "<c-f>", "y<esc><cmd>Telescope live_grep default_text=<c-r>0<cr>", opts)
-map("v", "c", '*<esc>Ncgn', {remap = true})
+map("v", "c", '*<esc>Ncgn', {remap = true})        -- c to edit current selection, repeatable by the dot key
 map("v", "d", '*<esc>Ndgn', {remap = true})
 cancel("v", {">", "<", "<esc>", ":"})
 
