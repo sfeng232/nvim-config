@@ -11,7 +11,8 @@ projs="$(cat ~/.open-project.cache)"
 
 for base in $projs; do
   if [[ -d $base/.git ]]; then
-    if git -C $HOME/$base status 2>/dev/null | grep -q "Changes\|Untracked"; then
+    status=`git -C $HOME/$base status --porcelain`
+    if [[ "$status" != "" ]]; then
       echo $base
     fi
   fi
