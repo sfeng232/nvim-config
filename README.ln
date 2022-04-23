@@ -67,3 +67,9 @@ Optional for various LSP servers
 
   ruby
     sudo apt-get install ruby
+
+  ueberzug to preview images
+    pip3 install ueberzug
+
+  dependency for previewing font files (ttf, otf)
+    sudo apt-get install sxiv

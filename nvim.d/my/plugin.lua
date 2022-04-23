@@ -21,9 +21,8 @@ if not status_ok then
   return
 end
 
-
-local status_ok, packer_luarocks = pcall(require, "packer.luarocks")
-if not status_ok then
+local ok2, packer_luarocks = pcall(require, "packer.luarocks")
+if not ok2 then
   return
 end
 packer_luarocks.install_commands()
@@ -99,6 +98,7 @@ packer.startup(function(use, use_rocks)
   -- download and install ripgrep deb from https://github.com/BurntSushi/ripgrep/releases
   use "nvim-telescope/telescope.nvim"
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
+  use 'nvim-telescope/telescope-media-files.nvim'
 
   -- Treesitter
   use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}

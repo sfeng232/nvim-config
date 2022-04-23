@@ -16,7 +16,10 @@ telescope.setup {
       'deps/',
       '_build/',
       '.git/',
-      '.svg$', '.png$', '.jpg$', '.gif$', '.otf$', '.ttf$', '.pyc$'
+      '.pyc$',
+      '.svg$',
+      -- '.png$', '.jpg$', '.gif$',
+      -- '.otf$', '.ttf$',
     },
 
     -- shorten, smart, absolute
@@ -66,8 +69,15 @@ telescope.setup {
       override_generic_sorter = true,  -- override the generic sorter
       override_file_sorter = true,     -- override the file sorter
       case_mode = "smart_case",        -- or "ignore_case" or "respect_case" the default case_mode is "smart_case"
+    },
+    media_files = {
+      -- filetypes whitelist
+      -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
+      filetypes = {"png", "webp", "jpg", "jpeg", "svg", "ttf", "otf"},
+      find_cmd = "rg" -- find command (defaults to `fd`)
     }
   },
 }
 
 telescope.load_extension('fzf')
+telescope.load_extension('media_files')
