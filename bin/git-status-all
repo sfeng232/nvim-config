@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 # set -x
 
-projs="$(fdfind -H "^project.vim" $HOME | sed -e 's|/\.devbase.*||' -e 's|/project.vim||' -e "s|$HOME/||")"
-
 echo "Projects with changes:"
 echo
+
+if [[ ! -f ~/.open-project.cache ]]; then
+  fdfind -H "^project.vim" $HOME | sed -e 's|/\.devbase.*||' -e 's|/project.vim||' -e "s|$HOME/||" > ~/.open-project.cache
+fi
+projs="$(cat ~/.open-project.cache)"
 
 for base in $projs; do
   if [[ -d $base/.git ]]; then

@@ -67,4 +67,4 @@ local opts = { noremap = true, silent = true }
 local map = vim.api.nvim_set_keymap
 map("n", "gs", "<cmd>Telescope git_status<cr>", opts)
 map("n", "gu", "<cmd>call TmuxPopup('echo git pull...; git pull; any-key')<cr>", opts)
-map("n", "gi", "<cmd>call TmuxPopup('git gui')<cr>", opts)
+map("n", "gi", "<cmd>call TmuxPopup('git commit')<cr>", opts)
