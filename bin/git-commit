@@ -34,6 +34,7 @@ if [[ "$?" != "0" ]]; then
 fi
 
 read -p "Pull and push? [y/n] " -n1 ans
+echo
 if [[ "$ans" = "y" ]]; then
   git-pull-and-push
 fi
