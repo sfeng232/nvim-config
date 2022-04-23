@@ -55,7 +55,7 @@ gitsigns.setup {
     map('n', 'gj', gs.next_hunk)
     map('n', 'gk', gs.prev_hunk)
     map('n', 'gr', gs.reset_hunk)
-    map('n', 'gp', gs.preview_hunk)
+    map('n', 'gh', gs.preview_hunk)
     map('n', 'gd', gs.diffthis)
     -- stage/unstage hunk with <leader>g + s/u
     map("n", "<leader>gk", ":call system('gitk ' . expand('%'))<cr>")    -- only the current file
@@ -68,3 +68,4 @@ local map = vim.api.nvim_set_keymap
 map("n", "gs", "<cmd>Telescope git_status<cr>", opts)
 map("n", "gu", "<cmd>call TmuxPopup('echo git pull...; git pull; any-key')<cr>", opts)
 map("n", "gi", "<cmd>call TmuxPopup('git commit; any-key')<cr>", opts)
+map("n", "gpp", "<cmd>call TmuxPopup('git-pull-and-push; any-key')<cr>", opts)

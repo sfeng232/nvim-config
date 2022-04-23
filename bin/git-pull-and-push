@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# set -x
+
+branch=`git rev-parse --abbrev-ref HEAD`
+
+echo pulling from branch $branch ...
+
+git pull origin $branch
+
+echo pushing local commits ...
+
+git push origin $branch
