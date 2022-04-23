@@ -17,7 +17,7 @@ for base in $projs; do
     if [[ "$status" != "" ]]; then
       echo "$base (Uncommited changes)"
     elif [[ "$commits" != "" ]]; then
-      echo "$base (Unpushed commits)"
+      echo "$base (Local commits)"
     fi
   fi
 done
