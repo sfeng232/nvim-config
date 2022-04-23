@@ -48,8 +48,6 @@ map("n", "d*", '*Ndgn', opts)
 map("n", "c.", '<cmd>let @/=@"<cr>/<cr>cgn<c-r>.<esc>', opts)       -- c. to make the last edit repeatable by dot
 map("n", "d.", '<cmd>let @/=@"<cr>/<cr>dgn<c-r>.<esc>', opts)
 cancel("n", {">>", "<<", ":", "/", "?", "Q", "qq", "<bs>", "<del>", "<cr>", "<up>", "<down>", "<left>", "<right>"})
--- map("n", "<C-h>", "<C-w>h", opts)    -- switch window
--- map("n", "<C-l>", "<C-w>l", opts)
 
 -- Insert
 map("i", "jk", "<esc>", opts)
@@ -59,16 +57,14 @@ map("i", "<c-n>", "<Cmd>lua require('cmp').complete()<CR>", opts)
 cancel("i", {"<esc>", "<del>", "<cr>", "<up>", "<down>", "<left>", "<right>"})
 
 -- Visual
-map("v", "<c-j>", "<gv", opts)
-map("v", "<c-k>", ">gv", opts)
-map("v", "hu", ":")
-map("v", "p", '"_dP', opts)
-map("v", "ss", '<esc><cmd>lua require("my.send").send_highlighted_lines()<cr>', opts)
-map("v", "sf", "<Plug>(comment_toggle_linewise_visual)", opts)
-map("v", "<c-f>", "y<esc><cmd>Telescope live_grep default_text=<c-r>0<cr>", opts)
-map("v", "c", '*<esc>Ncgn', {remap = true})        -- c to edit current selection, repeatable by the dot key
-map("v", "d", '*<esc>Ndgn', {remap = true})
-cancel("v", {">", "<", "<esc>", ":"})
+map("x", "<c-j>", "<gv", opts)
+map("x", "<c-k>", ">gv", opts)
+map("x", "hu", ":")
+map("x", "p", '"_dP', opts)
+map("x", "ss", '<esc><cmd>lua require("my.send").send_highlighted_lines()<cr>', opts)
+map("x", "sf", "<Plug>(comment_toggle_linewise_visual)", opts)
+map("x", "<c-f>", "y<esc><cmd>Telescope live_grep default_text=<c-r>0<cr>", opts)
+cancel("x", {">", "<", "<esc>", ":"})
 
 -- Command
 map("c", "jk", "<c-c>", opts)

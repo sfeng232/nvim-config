@@ -716,110 +716,110 @@ snippet sql "sql" b
 \` */
 endsnippet
 
-snippet jsonb "@> - check if contain" b
+snippet jsonb_@> "@> - check if contain" b
 '{"a":1, "b":2}'::jsonb @> '{"b":2}'::jsonb
 endsnippet
 
-snippet jsonb "? - check if exists" b
+snippet jsonb_? "? - check if exists" b
 '{"a":1, "b":2}'::jsonb ? 'b'
 endsnippet
 
-snippet jsonb "?| - check if any exists" b
+snippet jsonb_?| "?| - check if any exists" b
 '{"a":1, "b":2, "c":3}'::jsonb ?| array['b', 'd']
 endsnippet
 
-snippet jsonb "?& - check if all exists" b
+snippet jsonb_?& "?& - check if all exists" b
 '["a", "b", "c"]'::jsonb ?& array['a', 'b']
 endsnippet
 
-snippet jsonb "|| - concat" b
+snippet jsonb_|| "|| - concat" b
 '["a", "b"]'::jsonb || '["a", "d"]'::jsonb
 endsnippet
 
-snippet jsonb "- - delete one / many" b
+snippet jsonb_- "- - delete one / many" b
 '{"a": "b", "c": "d"}'::jsonb - 'a'
 '{"a": "b", "c": "d"}'::jsonb - array['a', 'b']
 endsnippet
 
-snippet jsonb "#- - delete by path" b
+snippet jsonb_#- "#- - delete by path" b
 '["a", {"b":1}]'::jsonb #- '{1,b}'
 endsnippet
 
-snippet jsonb "@? - check exists by jsonpath" b
+snippet jsonb_@? "@? - check exists by jsonpath" b
 '{"a":[1,2,3,4,5]}'::jsonb @? '$.a[*] ? (@ > 2)'
 endsnippet
 
-snippet jsonb "@@ - run jsonpath predicate" b
+snippet jsonb_@@ "@@ - run jsonpath predicate" b
 '{"a":[1,2,3,4,5]}'::jsonb @@ '$.a[*] > 2'
 endsnippet
 
-snippet jsonb "to_jsonb - anyelement to json" b
+snippet jsonb_to "to_jsonb - anyelement to json" b
 to_jsonb($0)
 endsnippet
 
-snippet jsonb "jsonb_build_object - build json" b
+snippet jsonb_build_object "jsonb_build_object - build json" b
 jsonb_build_object('key1', 'value1')
 endsnippet
 
-snippet jsonb "jsonb_array_elements - json to rows" b
+snippet jsonb_array_elements "jsonb_array_elements - json to rows" b
 select * from jsonb_array_elements('[1,true, [2,false]]')
 select * from jsonb_array_elements_text('["foo", "bar"]')
 endsnippet
 
-snippet jsonb "jsonb_array_length - build json" b
+snippet jsonb_array_length "jsonb_array_length - build json" b
 jsonb_array_length($0)
 endsnippet
 
-snippet jsonb "jsonb_each - json obj (kv pair) to rows" b
+snippet jsonb_each "jsonb_each - json obj (kv pair) to rows" b
 select * from jsonb_each('{"a":"1", "b":"2"}')
 select * from jsonb_each_text('{"a":"1", "b":"2"}')
 endsnippet
 
-snippet jsonb "jsonb_extract_path - get with variadic path" b
+snippet jsonb_extract_path "jsonb_extract_path - get with variadic path" b
 jsonb_extract_path('{"a":{"b":1}}', 'a', 'b')
 jsonb_extract_path_text('{"a":{"b":1}}', 'a', 'b')
 endsnippet
 
-snippet jsonb "jsonb_object_keys - get keys" b
+snippet jsonb_object_keys "jsonb_object_keys - get keys" b
 jsonb_object_keys($0)
 endsnippet
 
-snippet jsonb "jsonb_set - update json by path" b
+snippet jsonb_set "jsonb_set - update json by path" b
 jsonb_set('[{"a":1}]', '{0,a}', '[2,3,4]')
 endsnippet
 
-snippet jsonb "jsonb_insert - insert element to json array" b
+snippet jsonb_insert "jsonb_insert - insert element to json array" b
 jsonb_insert('{"a": [0,2,3]}', '{a, 1}'::text[], '1')
 endsnippet
 
-snippet jsonb "jsonb_move - insert element within jsonb array" b
+snippet jsonb_move "jsonb_move - insert element within jsonb array" b
 jsonb_move('[0, 1, 2, 3, 4, 5, 6]'::jsonb, 2, 4)
 endsnippet
 
-snippet jsonb "jsonb_strip_nulls - remote nulls (object only)" b
+snippet jsonb_strip_nulls "jsonb_strip_nulls - remote nulls (object only)" b
 jsonb_strip_nulls('{"a":1, "b":null}')
 endsnippet
 
-snippet jsonb "jsonb_path_exists - check if exists by jsonpath and a json parameters" b
+snippet jsonb_path_exists "jsonb_path_exists - check if exists by jsonpath and a json parameters" b
 jsonb_path_exists('{"a":[1,2,3,4,5]}', '$.a[*] ? (@ >= $min && @ <= $max)', '{"min":2, "max":4}')
 endsnippet
 
-snippet jsonb "jsonb_path_match - check jsonpath predicate with a json parameters" b
+snippet jsonb_path_match "jsonb_path_match - check jsonpath predicate with a json parameters" b
 jsonb_path_match('{"a":[1,2,3,4,5]}', 'exists($.a[*] ? (@ >= $min && @ <= $max))', '{"min":2, "max":4}')
 endsnippet
 
-snippet jsonb "jsonb_path_query - get by jsonpath and a json parameters" b
+snippet jsonb_path_query "jsonb_path_query - get by jsonpath and a json parameters" b
 jsonb_path_query('{"a":[1,2,3,4,5]}', '$.a[*] ? (@ >= $min && @ <= $max)', '{"min":2, "max":4}')
 	#=> rows
 jsonb_path_query_array #=> jsonb array
 jsonb_path_query_first #=> first match
 endsnippet
 
-snippet jsonb "jsonb_agg - aggregate as jsonb array" b
+snippet jsonb_agg "jsonb_agg - aggregate as jsonb array" b
 jsonb_agg($0)
 endsnippet
 
-snippet jsonb "jsonb_object_agg - aggregate as jsonb object" b
+snippet jsonb_object_agg "jsonb_object_agg - aggregate as jsonb object" b
 jsonb_object_agg($0, $1)
 endsnippet
 
