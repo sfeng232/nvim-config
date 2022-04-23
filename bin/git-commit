@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# set -x
+
+status=`git status --porcelain`
+
+if [[ "$status" = "" ]]; then
+  echo "Nothing to commit"
+  exit 1
+fi
+
+changes=`echo "$status" | cut -c2 | sed '/^ $/d'`
+
+if [[ "$changes" != "" ]]; then
+  echo
+  echo "$status"
+  echo
+  read -p "Git add -A .? [y/n/c] " -n1 ans
+  echo
+  if [[ "$ans" = "y" ]]; then
+    git add -A .
+  elif [[ "$ans" = "c" ]]; then
+    echo "Canceled"
+    exit 1
+  elif [[ "$ans" != "n" ]]; then
+    echo "Unexpected answer [${ans}], aborted"
+    exit 1
+  fi
+fi
+
+git commit
+
+if [[ "$?" != "0" ]]; then
+  exit 1
+fi
+
+read -p "Pull and push? [y/n] " -n1 ans
+if [[ "$ans" = "y" ]]; then
+  git-pull-and-push
+fi

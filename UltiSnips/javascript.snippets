@@ -766,6 +766,10 @@ select * from jsonb_array_elements('[1,true, [2,false]]')
 select * from jsonb_array_elements_text('["foo", "bar"]')
 endsnippet
 
+snippet jsonb_to_recordset "jsonb_to_recordset" b
+jsonb_to_recordset(:jsonb) as r(name string, price int)
+endsnippet
+
 snippet jsonb_array_length "jsonb_array_length - build json" b
 jsonb_array_length($0)
 endsnippet
