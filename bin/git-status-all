@@ -12,10 +12,12 @@ projs="$(cat ~/.open-project.cache)"
 for base in $projs; do
   if [[ -d $base/.git ]]; then
     status=`git -C $HOME/$base status --porcelain`
+    commits=`git -C $HOME/$base cherry -v 2>/dev/null`
+
     if [[ "$status" != "" ]]; then
-      echo $base
+      echo "$base (Uncommited changes)"
+    elif [[ "$commits" != "" ]]; then
+      echo "$base (Unpushed commits)"
     fi
   fi
 done
-
-any-key
