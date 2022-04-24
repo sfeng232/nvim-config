@@ -18,8 +18,7 @@ telescope.setup {
       '.git/',
       '.pyc$',
       '.svg$',
-      -- '.png$', '.jpg$', '.gif$',
-      -- '.otf$', '.ttf$',
+      '.otf$', '.ttf$',
     },
 
     -- shorten, smart, absolute
@@ -34,26 +33,18 @@ telescope.setup {
         ["<m-k>"] = actions.move_selection_previous,
 
         ["<C-c>"] = actions.close,
-
-        ["<c-j>"] = actions.select_default,
-        -- ["<c-j>"] = actions.select_tab,
-        -- ["<C-x>"] = actions.select_horizontal,
-        -- ["<C-v>"] = actions.select_vertical,
-
-        -- ["<C-u>"] = actions.preview_scrolling_up,
-        -- ["<C-d>"] = actions.preview_scrolling_down,
-        ["<C-u>"] = false,
-        ["<C-d>"] = false,
         ["jk"] = actions.close,
         ["<esc>"] = actions.close,
+
+        ["<c-j>"] = actions.select_default,
+
+        ["<up>"] = actions.preview_scrolling_up,
+        ["<down>"] = actions.preview_scrolling_down,
         ["<c-/>"] = actions.which_key,
 
-        -- ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
-        -- ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-        -- ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-        -- ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+        ["<C-u>"] = false,
+        ["<C-d>"] = false,
         ["<C-l>"] = false,
-        -- ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
       },
     },
   },
