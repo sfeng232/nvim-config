@@ -1,0 +1,9 @@
+{
+  "name": "nvim-uid",
+  "version": "0.0.1",
+  "description": "nvim-uid",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^13.6.0"
+  }
+}

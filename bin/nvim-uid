@@ -7,7 +7,6 @@ const child_process = require('child_process');
 
 const projectName = process.env.COMPOSE_PROJECT_NAME;
 const pipePath = `/tmp/nvim-uid-${projectName}.sock`;
-console.log(`listening to ${pipePath}`);
 
 const execP = (cli, options) =>
   new Promise((resolve, reject) => {
@@ -16,8 +15,11 @@ const execP = (cli, options) =>
     });
   });
 
+let browser = null;
+let fd = null;
+
 const main = async () => {
-  const browser = await puppeteer.launch({
+  browser = await puppeteer.launch({
     ignoreHTTPSErrors: true,
     defaultViewport: {
       width: 1024,
@@ -25,33 +27,37 @@ const main = async () => {
       deviceScaleFactor: 1.5,
     },
   });
+  const page = await browser.newPage();
+
   const previewer = child_process.spawn("ueberzug", ["layer", "--silent", "--parser", "bash"]);
   previewer.stdin.setEncoding('utf-8');
   previewer.stdout.pipe(process.stdout);
 
   await execP(`rm -f ${pipePath}`);
   child_process.spawnSync('mkfifo', [pipePath]);
-  const fd = await promisify(fs.open)(pipePath, fs.constants.O_RDWR);
+  fd = await promisify(fs.open)(pipePath, fs.constants.O_RDWR);
   const stream = fs.createReadStream(null, {fd, autoClose: false});
+  console.log(`listening to ${pipePath}`);
   stream.on('data', async (d) => {
     const msg = d.toString();
     console.log(`Received msg: ${msg}`);
     const parts = msg.split(' ');
 
-    if (parts[0] === "quit") {
-      browser.close();
-      stream.destroy();
-      fd.close();
-
-    } else if (parts[0] === "url") {
-      const page = await browser.newPage();
+    if (parts[0] === "url") {
+      const imgDir = `${process.env.HOME}/.nvim-uid`;
+      if (!fs.existsSync(imgDir)) {
+        console.log(`${imgDir} does not exists, please create with:`);
+        console.log(`  mkdir -p ~/.nvim-uid`);
+        console.log(`\nand even make it a ramdisk`);
+        console.log(`  sudo mount -t tmpfs -o size=100m tmpfs ~/.nvim-uid`);
+        return;
+      }
+      const imgPath = `${imgDir}/web.png`;
       await page.goto(parts[1]);
       await page.screenshot({
-        path: "/tmp/web.png",
+        path: imgPath,
         fullPage: true,
       });
-      await page.close();
-
       const size = await execP("tmux lsp -F '#{pane_height} #{pane_width}' | head -n1");
       const [h, w] = size.trim().split(' ');
       const cmd = [
@@ -61,11 +67,18 @@ const main = async () => {
         // '[scaler]="forced_cover"',
         // '[scaling_position_x]="0.5"',
         // '[scaling_position_y]="0.5"',
-        `[width]="${w}" [height]="${h}" [path]="/tmp/web.png")`
+        `[width]="${w}" [height]="${h}" [path]="${imgPath}")`
       ].join(' ');
       previewer.stdin.write(`${cmd}\n`);
+      console.clear();
     }
   });
 }
 
 main();
+
+process.on('SIGINT', () => {
+  browser.close();
+  fs.close(fd);
+  process.kill(process.pid, 'SIGTERM');
+});
