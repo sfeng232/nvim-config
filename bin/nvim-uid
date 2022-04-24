@@ -1,0 +1,71 @@
+#!/usr/bin/env node
+
+const puppeteer = require('puppeteer');
+const fs = require('fs');
+const {promisify} = require('util');
+const child_process = require('child_process');
+
+const projectName = process.env.COMPOSE_PROJECT_NAME;
+const pipePath = `/tmp/nvim-uid-${projectName}.sock`;
+console.log(`listening to ${pipePath}`);
+
+const execP = (cli, options) =>
+  new Promise((resolve, reject) => {
+    child_process.exec(cli, options, (error, stdout) => {
+      error ? reject(error.message) : resolve(stdout);
+    });
+  });
+
+const main = async () => {
+  const browser = await puppeteer.launch({
+    ignoreHTTPSErrors: true,
+    defaultViewport: {
+      width: 1024,
+      height: 768,
+      deviceScaleFactor: 1.5,
+    },
+  });
+  const previewer = child_process.spawn("ueberzug", ["layer", "--silent", "--parser", "bash"]);
+  previewer.stdin.setEncoding('utf-8');
+  previewer.stdout.pipe(process.stdout);
+
+  await execP(`rm -f ${pipePath}`);
+  child_process.spawnSync('mkfifo', [pipePath]);
+  const fd = await promisify(fs.open)(pipePath, fs.constants.O_RDWR);
+  const stream = fs.createReadStream(null, {fd, autoClose: false});
+  stream.on('data', async (d) => {
+    const msg = d.toString();
+    console.log(`Received msg: ${msg}`);
+    const parts = msg.split(' ');
+
+    if (parts[0] === "quit") {
+      browser.close();
+      stream.destroy();
+      fd.close();
+
+    } else if (parts[0] === "url") {
+      const page = await browser.newPage();
+      await page.goto(parts[1]);
+      await page.screenshot({
+        path: "/tmp/web.png",
+        fullPage: true,
+      });
+      await page.close();
+
+      const size = await execP("tmux lsp -F '#{pane_height} #{pane_width}' | head -n1");
+      const [h, w] = size.trim().split(' ');
+      const cmd = [
+        'declare -Ap cmd=([action]=add [identifier]="preview"',
+        '[x]="0" [y]="1"',
+        '[scaler]="fit_contain"',
+        // '[scaler]="forced_cover"',
+        // '[scaling_position_x]="0.5"',
+        // '[scaling_position_y]="0.5"',
+        `[width]="${w}" [height]="${h}" [path]="/tmp/web.png")`
+      ].join(' ');
+      previewer.stdin.write(`${cmd}\n`);
+    }
+  });
+}
+
+main();
