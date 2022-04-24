@@ -79,6 +79,7 @@ main();
 
 process.on('SIGINT', () => {
   browser.close();
-  fs.close(fd);
+  fs.closeSync(fd);
+  fs.unlinkSync(pipePath);
   process.kill(process.pid, 'SIGTERM');
 });

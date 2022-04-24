@@ -73,3 +73,6 @@ Optional for various LSP servers
 
   dependency for previewing font files (ttf, otf)
     sudo apt-get install sxiv
+
+  pug linting
+    sudo npm install -g pug-lint
