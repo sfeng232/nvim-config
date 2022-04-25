@@ -965,3 +965,15 @@ snippet pgtest "A quick playground for postgres" b
 	alter table testtbl drop column price
 \`;
 endsnippet
+
+snippet pg "pg test with console.log" b
+console.log(\`
+	-- expand
+	with recursive t as (
+		select 1 as i
+		union
+		select i + 1 from t where i < 10
+	)
+	select i from t
+\`);
+endsnippet
