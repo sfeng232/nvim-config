@@ -63,7 +63,10 @@ map("x", "hu", ":")
 map("x", "p", '"_dP', opts)
 map("x", "ss", '<esc><cmd>lua require("my.send").send_highlighted_lines()<cr>', opts)
 map("x", "sf", "<Plug>(comment_toggle_linewise_visual)", opts)
-map("x", "<c-f>", "y<esc><cmd>Telescope live_grep default_text=<c-r>0<cr>", opts)
+map("x", "<c-f>", function()
+  vim.cmd([[normal "ay]])
+  vim.cmd("Telescope live_grep default_text=" .. vim.fn.getreg("a"))
+end)
 cancel("x", {">", "<", "<esc>", ":"})
 
 -- Command

@@ -45,7 +45,7 @@ function! LoadProjectVimRC()
     endif
   endif
 endfunction
-au! BufWritePost .devbase/project.vim.lua luafile %
+au! BufWritePost project.vim.lua luafile %
 
 
 augroup _general_settings
