@@ -1,3 +1,40 @@
+_G.run_cmd = function(cmd)
+  local handle = io.popen(cmd)
+  local output = handle:read("*a")
+  handle:close()
+  return output
+end
+
+_G.console_ctl = function(cmd)
+  return function()
+    local left_pane = run_cmd([[tmux list-panes -F '#{pane_id} #{pane_start_command}' | grep leftpane]])
+    local paneId = left_pane:match("([^ ]+)") or ""
+
+    local kill_pane = function()
+      run_cmd("tmux send-keys -t " .. paneId .. " c-c c-d 2>/dev/null")
+    end
+    local actual_cmd = "zsh -c 'echo leftpane > /dev/null && " .. cmd .. "'"
+    local subed = string.gsub(cmd, '"', '\\"')
+
+    if string.find(left_pane, subed, 0, true) then
+      kill_pane()
+    elseif paneId == "" then
+      run_cmd('tmux splitw -dhb -p32 -- ' .. actual_cmd)
+    else
+      run_cmd('tmux splitw -dvb -t "' .. paneId .. '" -- ' .. actual_cmd)
+      kill_pane()
+    end
+  end
+end
+
+_G.exec_in_split = function(cmd, tmux_arg)
+  local cmd2 = "echo " .. cmd .. "; " .. cmd
+  local cmd3 = "tmux splitw " .. (tmux_arg or "") .. " \"zsh -c '" .. cmd2 .. "'\""
+  run_cmd(cmd3)
+end
+
+
+
 local M = {}
 
 local last_line = ""
