@@ -1,6 +1,3 @@
-issues
-  feat: ss in lokinote should has no spaces (good for pasting password)
-
 How to use this repo
   fork it
   in nvim.d/my/keymap.lua, comment out lines started with "cancel"

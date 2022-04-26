@@ -24,8 +24,8 @@ M.send_line_to_next_pane = function(line)
     notify("Target pane not found", "error")
     return
   end
-  last_line = line
-  local cmd = "tmux send-keys -t" .. next_pane .. " '" .. line:gsub("'", [['\'']]) .. "' enter"
+  last_line = line:gsub("'", [['\'']]):gsub("^ *", ""):gsub("\n *", "\n")
+  local cmd = "tmux send-keys -t" .. next_pane .. " '" .. last_line .. "' enter"
   M.run_shell(cmd)
 end
 
