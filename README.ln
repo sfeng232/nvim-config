@@ -69,7 +69,11 @@ Optional for various LSP servers
     sudo apt-get install ruby
 
   ueberzug to preview images
+    sudo apt install -y libx11-dev x11proto-xext-dev libxext-dev
     pip3 install ueberzug
+
+  puppeteer to preview pug
+    npm install (in this folder)
 
   dependency for previewing font files (ttf, otf)
     sudo apt-get install sxiv
