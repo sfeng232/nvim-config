@@ -41,7 +41,7 @@ ln -s `pwd`/vimrc.lua ~/.config/nvim/init.lua
 ln -s `pwd`/nvim.d ~/.config/nvim/lua
 ln -s `pwd`/UltiSnips ~/.config/nvim/UltiSnips
 ln -s `pwd`/tmux.conf ~/.tmux.conf
-ln -s `pwd`/kitty.conf ~/.config/kitty/kitty.conf
+[ -d ~/.config/kitty ] && ln -s `pwd`/kitty.conf ~/.config/kitty/kitty.conf
 
 echo "Symlinks done"
 
