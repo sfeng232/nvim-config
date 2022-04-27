@@ -11,7 +11,7 @@ _G.console_ctl = function(cmd)
     local paneId = left_pane:match("([^ ]+)") or ""
 
     local kill_pane = function()
-      run_cmd("tmux send-keys -t " .. paneId .. " c-c c-d 2>/dev/null")
+      run_cmd("tmux send-keys -t " .. paneId .. " c-c 2>/dev/null; tmux send-keys -t " .. paneId .. " c-d 2>/dev/null")
     end
     local actual_cmd = "zsh -c 'echo leftpane > /dev/null && " .. cmd .. "'"
     local subed = string.gsub(cmd, '"', '\\"')

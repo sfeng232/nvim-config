@@ -1,8 +1,7 @@
-issues
-  toggling console-ctl is not smooth in farmweb
-  workflow to reset git change on a specific file
-  auto reload firefox
-  hot reload?
+Todo
+  feat: workflow to reset a changed file from git
+  feat: auto reload firefox
+  feat: hot reload?
 
 How to use this repo
   fork it
