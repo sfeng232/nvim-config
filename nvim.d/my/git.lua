@@ -66,6 +66,7 @@ gitsigns.setup {
 local opts = { noremap = true, silent = true }
 local map = vim.api.nvim_set_keymap
 map("n", "gs", "<cmd>Telescope git_status<cr>", opts)
+map("n", "gc", "<cmd>Telescope git_commits<cr>", opts)
 map("n", "gu", "<cmd>call TmuxPopup('echo git pull...; git pull; any-key')<cr>", opts)
 map("n", "gi", "<cmd>call TmuxPopup('git-commit; any-key')<cr>", opts)
 map("n", "gpp", "<cmd>call TmuxPopup('git-pull-and-push; any-key')<cr>", opts)
