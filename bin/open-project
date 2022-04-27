@@ -14,10 +14,7 @@
 
 input="$1"
 
-if [[ ! -f ~/.open-project.cache ]]; then
-  fdfind -H "^project.vim" $HOME | sed -e 's|/\.devbase.*||' -e 's|/project.vim||' -e "s|$HOME/||" | uniq > ~/.open-project.cache
-fi
-projs="$(cat ~/.open-project.cache)"
+projs=`list-projects`
 
 if [[ "$input" = "" ]]; then
   picked="$(echo "$projs" | sort -r | fzf-tmux-popup -p -w 50 -h 50% -m)"

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# set -x
+
+if [[ ! -f ~/.open-project.cache ]]; then
+  tmux display-message "Scanning for projects ..."
+  fdfind -H "^project.vim" $HOME | sed -e 's|/\.devbase.*||' -e 's|/project.vim||' -e "s|$HOME/||" | uniq > ~/.open-project.cache
+fi
+cat ~/.open-project.cache

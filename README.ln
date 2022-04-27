@@ -1,5 +1,8 @@
 issues
   toggling console-ctl is not smooth in farmweb
+  workflow to reset git change on a specific file
+  auto reload firefox
+  hot reload?
 
 How to use this repo
   fork it

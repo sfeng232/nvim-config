@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
 echo
-read -n 1 -s -r -p '- Press any key to continue -'
+read -n 1 -s -r -p "$(tput setaf 6)- Press any key to continue -$(tput setaf 7)"
 
