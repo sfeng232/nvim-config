@@ -1,5 +1,4 @@
 Todo
-  feat: workflow to reset a changed file from git
   feat: auto reload firefox
   feat: hot reload?
 
@@ -41,7 +40,7 @@ Environment
   ripgrep: for live fuzzy searching
     sudo apt-get install ripgrep
 
-  fdfind: for searching files by name
+  fdfind: for searching files by name (used in telescope as well)
     sudo apt-get install fd-find
 
   fzf: for project switching (tmux)

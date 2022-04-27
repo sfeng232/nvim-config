@@ -76,3 +76,6 @@ augroup lokinote
   au! BufNewFile,BufRead *.ln set filetype=lokinote
   au! FileType lokinote so ~/.config/nvim/lua/lokinote.vim
 augroup end
+
+" auto reload changed files (work well with gs > m-r)
+au! FocusGained,BufEnter * checktime

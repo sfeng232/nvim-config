@@ -29,7 +29,7 @@ fi
 projName="$(echo "$picked" | cut -d'/' -f2)"
 
 if ! tmux list-windows -F "#W" | grep -q "^${projName}$"; then
-  cmd="cd $HOME/$picked ; zsh -ic '[ -f .envrc ] && source .envrc; TERM=screen-256color nvim'"
+  cmd="cd $HOME/$picked ; zsh -ic '[ -f .envrc ] && source .envrc; TERM=screen-256color; rm -f /tmp/nvim/$projName; nvim'"
   tmux new-window -n $projName "$cmd"
 fi
 

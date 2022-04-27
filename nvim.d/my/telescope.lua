@@ -52,7 +52,23 @@ telescope.setup {
     find_files = {
       theme = "dropdown",
       hidden = true,
-    }
+    },
+    git_status = {
+      mappings = {
+        i = {
+          ["<m-r>"] = function(prompt_bufnr)
+            local action_state = require("telescope.actions.state")
+            local selection = action_state.get_selected_entry()
+            if selection == nil then
+              return
+            end
+            run_cmd("git co '" .. selection.value .. "' > /dev/null")
+            actions.close(prompt_bufnr)
+            vim.cmd("Telescope git_status")
+          end,
+        },
+      },
+    },
   },
   extensions = {
     fzf = {
