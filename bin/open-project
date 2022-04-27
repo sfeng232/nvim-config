@@ -15,7 +15,7 @@
 input="$1"
 
 if [[ ! -f ~/.open-project.cache ]]; then
-  fdfind -H "^project.vim" $HOME | sed -e 's|/\.devbase.*||' -e 's|/project.vim||' -e "s|$HOME/||" > ~/.open-project.cache
+  fdfind -H "^project.vim" $HOME | sed -e 's|/\.devbase.*||' -e 's|/project.vim||' -e "s|$HOME/||" | uniq > ~/.open-project.cache
 fi
 projs="$(cat ~/.open-project.cache)"
 

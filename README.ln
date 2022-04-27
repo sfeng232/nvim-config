@@ -1,3 +1,6 @@
+issues
+  toggling console-ctl is not smooth in farmweb
+
 How to use this repo
   fork it
   in nvim.d/my/keymap.lua, comment out lines started with "cancel"
