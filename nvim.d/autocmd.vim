@@ -34,15 +34,15 @@ au! FileType lokinote so ~/loki/env/vim/lokinote.vim
 
 au VimEnter * call LoadProjectVimRC()
 function! LoadProjectVimRC()
-  if filereadable(".devbase/project.vim.lua")
+  if filereadable("project.vim.lua")
+    luafile project.vim.lua
+  elseif filereadable(".devbase/project.vim.lua")
     luafile .devbase/project.vim.lua
   endif
   if filereadable(".devbase/project.vim")
     so .devbase/project.vim
-  else
-    if filereadable("project.vim")
-      so project.vim
-    endif
+  elseif filereadable("project.vim")
+    so project.vim
   endif
 endfunction
 au! BufWritePost project.vim.lua luafile %
