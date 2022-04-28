@@ -33,7 +33,6 @@ local open_file = require('nvim-tree.actions.open-file')
 nvim_tree.setup {
   auto_reload_on_write = true,
   disable_netrw = true,
-  hide_root_folder = false,
   hijack_cursor = false,
   hijack_netrw = true,
   hijack_unnamed_buffer_when_opening = false,
@@ -47,7 +46,6 @@ nvim_tree.setup {
     width = 60,
     height = 30,
     side = "left",
-    auto_resize = true,
     number = false,
     relativenumber = false,
     mappings = {
@@ -82,10 +80,6 @@ nvim_tree.setup {
     "dashboard",
     "alpha",
   },
-  update_to_buf_dir = {
-    enable = true,
-    auto_open = true,
-  },
   diagnostics = {
     enable = true,
     icons = {
@@ -104,16 +98,5 @@ nvim_tree.setup {
     enable = true,
     ignore = true,
     timeout = 500,
-  },
-  quit_on_open = 0,
-  git_hl = 1,
-  disable_window_picker = 0,
-  root_folder_modifier = ":t",
-  show_icons = {
-    git = 1,
-    folders = 1,
-    files = 1,
-    folder_arrows = 1,
-    tree_width = 30,
   },
 }
