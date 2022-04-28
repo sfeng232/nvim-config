@@ -3,17 +3,8 @@
 -- https://www.youtube.com/watch?v=OhnLevLpGB4&list=PLhoH5vyxr6Qq41NFL4GvhFp-WLd5xzIzZ
 -- https://github.com/LunarVim/Neovim-from-scratch
 
-_G.ReloadConfig = function()
-  for name,_ in pairs(package.loaded) do
-    if name:match('^my') then
-      package.loaded[name] = nil
-    end
-  end
-  dofile("/home/loki/.config/nvim/init.lua")
-end
-vim.cmd [[command! ReloadConfig lua ReloadConfig()]]
-
 require "my.option"
+require "my.utilities"
 require "my.colorscheme"
 require "my.keymap"
 require "my.plugin"
