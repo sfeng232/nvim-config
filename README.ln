@@ -84,3 +84,11 @@ Optional for various LSP servers
 
   pug linting
     sudo npm install -g pug-lint
+
+  terminal recording
+    sudo apt-get install asciinema
+    npm install (in this folder)
+    usage
+      asciinema rec --overwrite test.json
+      asciinema play test.json
+      cat test.json | npx svg-term --out test.svg
