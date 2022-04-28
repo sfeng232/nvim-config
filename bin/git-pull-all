@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# set -x
+
+echo "task1   x"
+echo "task2   x"
+echo "task3   x"
+tput sc
+tput cup 1 8
+echo o
+tput rc
+echo hello
+
+# for base in `list-projects`; do
+#   if [[ -d $base/.git ]]; then
+#     status=`git -C $HOME/$base status --porcelain`
+#     commits=`git -C $HOME/$base cherry -v 2>/dev/null`
+#
+#     if [[ "$status" = "" && "$commits" = "" ]]; then
+#       echo "$base"
+#     fi
+#   fi
+# done
+
+# while true; do
+#   COMMAND=$(timedatectl) #Save command result in a var.
+#   echo "$COMMAND" #Print command result, including new lines.
+#
+#   sleep 1 #Keep above's output on screen during 3 seconds before clearing it
+#
+#   #Following code clears previously printed lines
+#   LINES=$(echo "$COMMAND" | wc -l) #Calculate number of lines for the output previously printed
+#   for (( i=1; i <= $(($LINES)); i++ ));do #For each line printed as a result of "timedatectl"
+#     tput cuu1 #Move cursor up by one line
+#     tput el #Clear the line
+#   done
+# done
+
+# for i in $(seq 1 50); do
+#   echo -ne "$i%\033[0K\r"
+#   sleep 1
+# done
+# echo "ended"
