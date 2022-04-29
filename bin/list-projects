@@ -3,8 +3,17 @@
 
 if [[ ! -f ~/.open-project.cache ]]; then
   tmux display-message "Scanning for projects ..."
-  fdfind -H "^project.vim" $HOME |\
-    sed -e 's|/\.devbase.*||' -e 's|/project.vim.lua||' -e 's|/project.vim||' -e "s|$HOME/||" |\
-    uniq > ~/.open-project.cache
+  projs=$(
+    fdfind -H "^project.vim" $HOME |\
+      sed -e 's|/\.devbase.*||' -e 's|/project.vim.lua||' -e 's|/project.vim||' -e "s|$HOME/||" |\
+      uniq
+  )
+  touch ~/.open-project.cache
+
+  for base in $projs; do
+    if [[ -d $HOME/$base/.git ]]; then
+      echo "$base" >> ~/.open-project.cache
+    fi
+  done
 fi
 cat ~/.open-project.cache

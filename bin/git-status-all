@@ -5,14 +5,12 @@ echo "Projects with changes:"
 echo
 
 for base in `list-projects`; do
-  if [[ -d $base/.git ]]; then
-    status=`git -C $HOME/$base status --porcelain`
-    commits=`git -C $HOME/$base cherry -v 2>/dev/null`
+  status=`git -C $HOME/$base status --porcelain`
+  commits=`git -C $HOME/$base cherry -v 2>/dev/null`
 
-    if [[ "$status" != "" ]]; then
-      echo "$base  - $(tput setaf 1)Uncommited changes$(tput setaf 7)"
-    elif [[ "$commits" != "" ]]; then
-      echo "$base  - $(tput setaf 1)Local commits$(tput setaf 7)"
-    fi
+  if [[ "$status" != "" ]]; then
+    echo "$base  - $(tput setaf 1)Uncommited changes$(tput setaf 7)"
+  elif [[ "$commits" != "" ]]; then
+    echo "$base  - $(tput setaf 1)Local commits$(tput setaf 7)"
   fi
 done

@@ -952,7 +952,7 @@ throw new Error("$0");
 endsnippet
 
 snippet pgtest "A quick playground for postgres" b
-\`
+console.log(\`
 	drop table if exists testtbl;
 	create table testtbl (
 		name text,
@@ -960,10 +960,10 @@ snippet pgtest "A quick playground for postgres" b
 	);
 	insert into testtbl (name, price) values ('apple', '123');
 	select * from testtbl
-\`;
-\`
+\`);
+console.log(\`
 	alter table testtbl drop column price
-\`;
+\`);
 endsnippet
 
 snippet pg "pg test with console.log" b
@@ -975,5 +975,16 @@ console.log(\`
 		select i + 1 from t where i < 10
 	)
 	select i from t
+\`);
+endsnippet
+
+snippet pgmvtest "pg mv test" b
+console.log(\`
+  drop materialized view if exists testmv;
+  create materialized view testmv as
+  select * from jsonb_to_recordset('[{"name":"apple","price":100}, {"name":"orange","price":200}]'::jsonb) as r(name text, price integer);
+\`);
+console.log(\`
+  select * from testmv group by name
 \`);
 endsnippet

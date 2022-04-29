@@ -1,42 +1,109 @@
 #!/usr/bin/env bash
 # set -x
 
-echo "task1   x"
-echo "task2   x"
-echo "task3   x"
+# https://linuxcommand.org/lc3_adv_tput.php
+
+declare -a pids
+declare -a logfiles
+
+tempdir=`mktemp -d`
+
+projs=`list-projects`
+
+for base in $projs; do
+  name=`echo "$base" | sed -e 's|/|.|'`
+  status=`git -C $HOME/$base status --porcelain`
+  commits=`git -C $HOME/$base cherry -v 2>/dev/null`
+
+  outfile="$tempdir/${name}.log"
+  echo "pulling $base" > $outfile
+
+  if [[ "$status" = "" && "$commits" = "" ]]; then
+    (
+      git -C $HOME/$base pull >> $outfile 2>&1
+      if [[ "$?" = "0" ]]; then
+        if grep -q "Already up to date" $outfile; then
+          echo "exit=nothing" >> $outfile
+        else
+          echo "exit=good" >> $outfile
+        fi
+      else
+        echo "exit=bad" >> $outfile
+      fi
+    ) &
+    pids+=("$!")
+  else
+    (
+      echo "Unstaged changes / commits detected" >> $outfile 2>&1
+      echo "exit=skipped" >> $outfile
+      exit 1
+    ) &
+    pids+=("$!")
+  fi
+  logfiles+=("$outfile")
+  echo "    $base"
+done
+
+fc_normal=$(tput setaf 7)
+fc_loading=$(tput setaf 81)
+fc_good=$(tput setaf 10)
+fc_bad=$(tput setaf 160)
+fc_nop=$(tput setaf 245)
+icon_good="${fc_good}${fc_normal}"
+icon_bad="${fc_bad}${fc_normal}"
+icon_skipped="${fc_bad}${fc_normal}"
+icon_nop="${fc_nop}${fc_normal}"
+
 tput sc
-tput cup 1 8
-echo o
+tput civis # hide cursor
+spin="⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏"
+i=0
+while true; do
+  i=$(( (i + 1) % ${#spin} ))
+
+  all_done=1
+  for k in "${!pids[@]}"; do
+    pid=${pids[$k]}
+    if [[ "$pid" != "" ]]; then
+      tput cup $k 1
+      all_done=0
+      if kill -s 0 $pid 2>/dev/null; then
+        echo -ne "${fc_loading}${spin:$i:1}${fc_normal}"
+      else
+        pids[$k]=""
+        state="$(grep "exit=" "${logfiles[$k]}" | cut -d'=' -f2)"
+        if [[ "$state" = "skipped" ]]; then
+          echo -ne $icon_skipped
+        elif [[ "$state" = "nothing" ]]; then
+          echo -ne $icon_nop
+        elif [[ "$state" = "good" ]]; then
+          echo -ne $icon_good
+        elif [[ "$state" = "bad" ]]; then
+          echo -ne $icon_bad
+        fi
+      fi
+    fi
+  done
+
+  if [[ $all_done = 1 ]]; then
+    break
+  fi
+  sleep .05
+done
+
+tput cnorm
 tput rc
-echo hello
 
-# for base in `list-projects`; do
-#   if [[ -d $base/.git ]]; then
-#     status=`git -C $HOME/$base status --porcelain`
-#     commits=`git -C $HOME/$base cherry -v 2>/dev/null`
-#
-#     if [[ "$status" = "" && "$commits" = "" ]]; then
-#       echo "$base"
-#     fi
-#   fi
-# done
+echo
+read -p "View detailed report? [y/n] " -n1 ans
+echo
+if [[ "$ans" = "y" ]]; then
+  sed -s -e $'$a\\\n' ${tempdir}/*.log |\
+    sed '/disabling multiplexing/d' |\
+    sed '/exit=/d' |\
+    sed '/^pulling/!s|^|    |' |\
+    sed '$d' |\
+    nvim -R -
+fi
 
-# while true; do
-#   COMMAND=$(timedatectl) #Save command result in a var.
-#   echo "$COMMAND" #Print command result, including new lines.
-#
-#   sleep 1 #Keep above's output on screen during 3 seconds before clearing it
-#
-#   #Following code clears previously printed lines
-#   LINES=$(echo "$COMMAND" | wc -l) #Calculate number of lines for the output previously printed
-#   for (( i=1; i <= $(($LINES)); i++ ));do #For each line printed as a result of "timedatectl"
-#     tput cuu1 #Move cursor up by one line
-#     tput el #Clear the line
-#   done
-# done
-
-# for i in $(seq 1 50); do
-#   echo -ne "$i%\033[0K\r"
-#   sleep 1
-# done
-# echo "ended"
+rm -rf $tempdir
