@@ -69,6 +69,10 @@ Optional for various LSP servers
   rust
     curl --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
+  lsd (rust based ls)
+    https://github.com/Peltoche/lsd/releases/download/0.21.0/lsd_0.21.0_amd64.deb
+    https://github.com/Peltoche/lsd/releases
+
   ruby
     sudo apt-get install ruby
 
