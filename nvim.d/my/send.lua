@@ -38,9 +38,14 @@ M.send_line_to_next_pane = function(line)
   M.send_line_to_pane(line, pane)
 end
 
-M.send_current_line = function()
+M.send_current_line = function(_dir)
   local line = vim.api.nvim_get_current_line()
-  M.send_line_to_next_pane(line)
+  local dir = _dir or "next"
+  if dir == "next" then
+    M.send_line_to_next_pane(line)
+  else
+    M.send_line_to_prev_pane(line)
+  end
 end
 
 M.send_last_line = function()
@@ -51,10 +56,15 @@ M.send_last_line = function()
   M.send_line_to_next_pane(last_line)
 end
 
-M.send_highlighted_lines = function()
+M.send_highlighted_lines = function(_dir)
   vim.cmd([[normal "ay]])
   local cmd = vim.fn.getreg("a")
-  M.send_line_to_next_pane(cmd)
+  local dir = _dir or "next"
+  if dir == "next" then
+    M.send_line_to_next_pane(cmd)
+  else
+    M.send_line_to_prev_pane(cmd)
+  end
 end
 
 M.run_popup = function(cmd)
