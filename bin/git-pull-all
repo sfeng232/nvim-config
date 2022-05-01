@@ -8,7 +8,7 @@ declare -a logfiles
 
 tempdir=`mktemp -d`
 
-projs=`list-projects`
+projs=`list-projects | head -n3`
 
 for base in $projs; do
   name=`echo "$base" | sed -e 's|/|.|'`
@@ -16,7 +16,7 @@ for base in $projs; do
   commits=`git -C $HOME/$base cherry -v 2>/dev/null`
 
   outfile="$tempdir/${name}.log"
-  echo "pulling $base" > $outfile
+  echo "repo $base" > $outfile
 
   if [[ "$status" = "" && "$commits" = "" ]]; then
     (
@@ -101,8 +101,8 @@ if [[ "$ans" = "y" ]]; then
   sed -s -e $'$a\\\n' ${tempdir}/*.log |\
     sed '/disabling multiplexing/d' |\
     sed '/exit=/d' |\
-    sed '/^pulling/!s|^|    |' |\
-    sed '$d' |\
+    sed '/^Already up to date/{s/A.*/no changes/;n;N;d}' |\
+    sed '/^repo/!s|^|    |' |\
     nvim -R -
 fi
 
