@@ -8,7 +8,7 @@ declare -a logfiles
 
 tempdir=`mktemp -d`
 
-projs=`list-projects | head -n3`
+projs=`list-projects`
 
 for base in $projs; do
   name=`echo "$base" | sed -e 's|/|.|'`
