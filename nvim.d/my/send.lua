@@ -18,15 +18,24 @@ M.run_shell = function(cmd)
   return output
 end
 
-M.send_line_to_next_pane = function(line)
-  local next_pane = M.run_shell("tmux list-panes | grep active -A1 | sed -n 2p"):gsub(": .*", "")
-  if next_pane == "" then
+M.send_line_to_pane = function(line, pane)
+  if pane == "" then
     notify("Target pane not found", "error")
     return
   end
   last_line = line:gsub("'", [['\'']]):gsub("^ *", ""):gsub("\n *", "\n")
-  local cmd = "tmux send-keys -t" .. next_pane .. " '" .. last_line .. "' enter"
+  local cmd = "tmux send-keys -t" .. pane .. " '" .. last_line .. "' enter"
   M.run_shell(cmd)
+end
+
+M.send_line_to_prev_pane = function(line)
+  local pane = M.run_shell("tmux list-panes | grep active -B1 | head -n1"):gsub(": .*", "")
+  M.send_line_to_pane(line, pane)
+end
+
+M.send_line_to_next_pane = function(line)
+  local pane = M.run_shell("tmux list-panes | grep active -A1 | sed -n 2p"):gsub(": .*", "")
+  M.send_line_to_pane(line, pane)
 end
 
 M.send_current_line = function()
