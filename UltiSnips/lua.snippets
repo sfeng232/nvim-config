@@ -41,4 +41,16 @@ if not status_ok then
 end
 endsnippet
 
+snippet au "autocmd with group" b
+local pyaugroup = vim.api.nvim_create_augroup("pyaugroup", {clear = true})
+vim.api.nvim_create_autocmd({"BufWritePre"}, {
+  group = pyaugroup,
+  pattern = "*.py",
+  callback = function()
+		$0
+    vim.lsp.buf.formatting_sync(nil, 200)
+  end
+})
+endsnippet
+
 # vim:ft=snippets:
