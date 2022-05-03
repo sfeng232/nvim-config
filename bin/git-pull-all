@@ -101,7 +101,10 @@ if [[ "$ans" = "y" ]]; then
   sed -s -e $'$a\\\n' ${tempdir}/*.log |\
     sed '/disabling multiplexing/d' |\
     sed '/exit=/d' |\
-    sed '/^Already up to date/{s/A.*/no changes/;n;N;d}' |\
+    sed '/^Already up to date/{n;N;d}' |\
+    tac |\
+    sed '/^Already up to date/{N;d}' |\
+    tac |\
     sed '/^repo/!s|^|    |' |\
     nvim -R -
 fi
