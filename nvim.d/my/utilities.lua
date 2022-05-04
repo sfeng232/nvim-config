@@ -1,3 +1,12 @@
+local status_ok, notify = pcall(require, "notify")
+if status_ok then
+  notify.setup({
+    timeout = 1000,
+    -- render = "minimal",
+  })
+  vim.notify = notify
+end
+
 _G.run_cmd = function(cmd)
   local handle = io.popen(cmd)
   local output = handle:read("*a")
@@ -49,3 +58,12 @@ _G.ReloadConfig = function()
   dofile("/home/loki/.config/nvim/init.lua")
 end
 vim.cmd [[command! ReloadConfig lua ReloadConfig()]]
+
+_G.deprecate = function(alt)
+  return function()
+    vim.notify("Use " .. alt .. " instead", "error", {
+      title = "Shortcut deprecated",
+    })
+  end
+end
+

@@ -2,15 +2,6 @@ local M = {}
 
 local last_line = ""
 
-local status_ok, notify = pcall(require, "notify")
-if not status_ok then
-  notify = vim.notify
-else
-  notify.setup({
-    render = "minimal",
-  })
-end
-
 M.run_shell = function(cmd)
   local handle = io.popen(cmd)
   local output = handle:read("*a")
@@ -20,7 +11,7 @@ end
 
 M.send_line_to_pane = function(line, pane)
   if pane == "" then
-    notify("Target pane not found", "error")
+    vim.notify("Target pane not found", "error")
     return
   end
   last_line = line:gsub("'", [['\'']]):gsub("^ *", ""):gsub("\n *", "\n")
@@ -49,7 +40,7 @@ end
 
 M.send_last_line = function()
   if last_line == "" then
-    notify("Last line not found", "error")
+    vim.notify("Last line not found", "error")
     return
   end
   M.send_line_to_next_pane(last_line)
