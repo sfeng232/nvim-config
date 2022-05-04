@@ -8,7 +8,12 @@ local opts = {
     documentFormatting = false
   },
   capabilities = capabilitiesWithoutFomatting,
-  init_options = {hostInfo = "neovim"},
+  init_options = {
+    hostInfo = "neovim",
+    preferences = {
+      disableSuggestions = true,
+    },
+  },
 }
 
 return opts
