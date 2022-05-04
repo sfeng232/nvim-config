@@ -11,6 +11,8 @@ cancel("", {"<space>"})
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+local send = require("my.send")
+
 -- Normal
 map("n", "q1", ":qa<cr>", opts)
 map("n", "qw", ":w<cr>", opts)
@@ -32,8 +34,9 @@ map("n", "<leader><m-l>", ":BufferLineMoveNext<cr>", opts)
 map("n", "<m-b>", "<cmd>Telescope buffers theme=dropdown<cr>", opts)
 map("n", "qf", "<cmd>bwipeout<cr>", opts)
 map("n", "<leader>cl", ":let @+ = expand('%:p')<cr>", opts)     -- copy current file path to clipboard
-map("n", "ss", require("my.send").send_current_line, opts)
-map("n", "sb", require("my.send").send_last_line, opts)
+map("n", "ss", send.send_current_line, opts)
+map("n", "sb", send.send_last_line, opts)
+map("n", "sc", send.send_current_cell, opts)
 map("n", "gV", '`[v`]', opts)
 map("n", "<leader>ps", ':PackerSync<cr>', opts)
 map("n", "hl", "<cmd>Telescope find_files<cr>", opts)
@@ -61,7 +64,7 @@ map("x", "<c-j>", "<gv", opts)
 map("x", "<c-k>", ">gv", opts)
 map("x", "hu", ":")
 map("x", "p", '"_dP', opts)
-map("x", "s", require("my.send").send_highlighted_lines, opts)
+map("x", "s", send.send_highlighted_lines, opts)
 map("x", "sf", "<Plug>(comment_toggle_linewise_visual)", opts)
 map("x", "<c-f>", function()
   vim.cmd([[normal "ay]])

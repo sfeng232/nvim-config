@@ -38,10 +38,9 @@ M.send_line_to_next_pane = function(line)
   M.send_line_to_pane(line, pane)
 end
 
-M.send_current_line = function(_dir)
+M.send_current_line = function(dir)
   local line = vim.api.nvim_get_current_line()
-  local dir = _dir or "next"
-  if dir == "next" then
+  if (dir or "next") == "next" then
     M.send_line_to_next_pane(line)
   else
     M.send_line_to_prev_pane(line)
@@ -56,11 +55,27 @@ M.send_last_line = function()
   M.send_line_to_next_pane(last_line)
 end
 
-M.send_highlighted_lines = function(_dir)
+M.send_highlighted_lines = function(dir)
   vim.cmd([[normal "ay]])
   local cmd = vim.fn.getreg("a")
-  local dir = _dir or "next"
-  if dir == "next" then
+  if (dir or "next") == "next" then
+    M.send_line_to_next_pane(cmd)
+  else
+    M.send_line_to_prev_pane(cmd)
+  end
+end
+
+-- send a cell like jupyter, cell is separated by empty lines
+M.send_current_cell = function(dir)
+  local sl = vim.fn.search("^$", "bnW")
+  local el = vim.fn.search("^$", "nW")
+  if el == 0 then
+    el = vim.fn.line("$")
+  end
+  local lines_tbl = vim.fn.getline(sl, el)
+  local lines = table.concat(lines_tbl, "\n")
+  local cmd = lines:gsub("\n$", ""):gsub("^\n", "")
+  if (dir or "next") == "next" then
     M.send_line_to_next_pane(cmd)
   else
     M.send_line_to_prev_pane(cmd)
