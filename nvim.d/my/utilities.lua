@@ -67,3 +67,24 @@ _G.deprecate = function(alt)
   end
 end
 
+_G.deprecate_keymap = function(map, key, alt)
+  vim.keymap.set(map, key, deprecate(alt))
+end
+
+-- project specific key mappings with which-key
+_G.which_key_map = function(prefix, mappings)
+  local wkok, which_key = pcall(require, "which-key")
+  if not wkok then
+    print "which-key.nvim is required but not found"
+    return
+  end
+  which_key.register(mappings, {
+    mode = "n",
+    prefix = prefix,
+    buffer = nil,
+    silent = true,
+    noremap = true,
+    nowait = true,
+  })
+end
+
