@@ -15,6 +15,7 @@ local send = require("my.send")
 
 -- Normal
 map("n", "q1", ":qa<cr>", opts)
+map("n", "qd", ":qa<cr>", opts)
 map("n", "qw", ":w<cr>", opts)
 map("n", "<c-c>", ":nohlsearch<cr>:redraw!<cr>", opts)
 map("n", "<m-n>", ":set nu! rnu!<cr>", opts)
