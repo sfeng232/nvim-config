@@ -9,16 +9,15 @@ M.run_shell = function(cmd)
   return output
 end
 
-M.send_line_to_pane = function(line, pane)
+M.send_line_to_pane = function(text, pane)
   if pane == "" then
     vim.notify("Target pane not found", "error")
     return
   end
-  local cb = io.popen("xclip -sel c", "w")
-  cb:write(line)
+  local cb = io.popen("tmux load-buffer -", "w")
+  cb:write(text)
   cb:close()
-  local currentPane = M.run_shell("tmux list-panes | grep active"):gsub(": .*", "")
-  M.run_shell("tmux selectp -t " .. pane .. "; xdotool key --clearmodifiers ctrl+shift+v Return; tmux selectp -t " .. currentPane)
+  M.run_shell("tmux paste-buffer -t " .. pane)
 end
 
 M.send_line_to_prev_pane = function(line)
@@ -32,7 +31,7 @@ M.send_line_to_next_pane = function(line)
 end
 
 M.send_current_line = function(dir)
-  local line = vim.api.nvim_get_current_line()
+  local line = vim.api.nvim_get_current_line() .. "\n"
   if (dir or "next") == "next" then
     M.send_line_to_next_pane(line)
   else
@@ -66,7 +65,7 @@ M.send_current_cell = function(dir)
     el = vim.fn.line("$")
   end
   local lines_tbl = vim.fn.getline(sl, el)
-  local lines = table.concat(lines_tbl, "\n")
+  local lines = table.concat(lines_tbl, "\n") .. "\n"
   local cmd = lines:gsub("\n$", ""):gsub("^\n", "")
   if (dir or "next") == "next" then
     M.send_line_to_next_pane(cmd)
