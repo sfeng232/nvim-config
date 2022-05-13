@@ -14,9 +14,11 @@ M.send_line_to_pane = function(line, pane)
     vim.notify("Target pane not found", "error")
     return
   end
-  last_line = line:gsub("'", [['\'']]):gsub("^ *", ""):gsub("\n *", "\n")
-  local cmd = "tmux send-keys -t" .. pane .. " '" .. last_line .. "' enter"
-  M.run_shell(cmd)
+  local cb = io.popen("xclip -sel c", "w")
+  cb:write(line)
+  cb:close()
+  local currentPane = M.run_shell("tmux list-panes | grep active"):gsub(": .*", "")
+  M.run_shell("tmux selectp -t " .. pane .. "; xdotool key --clearmodifiers ctrl+shift+v Return; tmux selectp -t " .. currentPane)
 end
 
 M.send_line_to_prev_pane = function(line)
