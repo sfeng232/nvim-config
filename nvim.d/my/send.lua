@@ -66,7 +66,7 @@ M.send_current_cell = function(dir)
   end
   local lines_tbl = vim.fn.getline(sl, el)
   local lines = table.concat(lines_tbl, "\n") .. "\n"
-  local cmd = lines:gsub("\n$", ""):gsub("^\n", "")
+  local cmd = lines
   if (dir or "next") == "next" then
     M.send_line_to_next_pane(cmd)
   else
