@@ -35,6 +35,20 @@ lsp_installer.on_server_ready(function(server)
     opts.filetypes = { "markdown", "rst", "html", "lokinote" }
   end
 
+  -- if (server.name == "sqls") then
+  --   opts.settings = {
+  --     sqls = {
+  --       lowercaseKeywords = false,
+  --       connections = {
+  --         {
+  --           driver = 'postgresql',
+  --           dataSourceName = 'host=127.0.0.1 port=15432 user=farmweb password=farmweb321 dbname=farmweb',
+  --         }
+  --       }
+  --     }
+  --   }
+  -- end
+
   if server.name == "ltex" then
     opts.filetypes = { "lokinote", "bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb", "tex" }
   end
