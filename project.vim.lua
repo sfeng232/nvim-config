@@ -1,5 +1,5 @@
 local view_log = "tail -f /dev/null"
-vim.keymap.set("n", "<leader>l", console_ctl(view_log))
+vim.keymap.set("n", "rl", console_ctl(view_log))
 
 vim.keymap.set(
   "n", "<leader>ga",

@@ -35,13 +35,15 @@ rm -rf \
   ~/.config/nvim/lua \
   ~/.config/nvim/UltiSnips \
   ~/.tmux.conf \
-  ~/.config/kitty/kitty.conf
+  ~/.config/kitty/kitty.conf \
+  ~/.config/wezterm/wezterm.conf
 
 ln -s `pwd`/vimrc.lua ~/.config/nvim/init.lua
 ln -s `pwd`/nvim.d ~/.config/nvim/lua
 ln -s `pwd`/UltiSnips ~/.config/nvim/UltiSnips
 ln -s `pwd`/tmux.conf ~/.tmux.conf
 [ -d ~/.config/kitty ] && ln -s `pwd`/kitty.conf ~/.config/kitty/kitty.conf
+[ -d ~/.config/wezterm ] && ln -s `pwd`/wezterm.conf ~/.config/wezterm/wezterm.conf
 
 echo "Symlinks done"
 
