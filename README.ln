@@ -59,6 +59,11 @@ Environment
     change your terminal emulator font setting
       I use gnome-terminal, with font size 17
 
+    UPDATES
+      I changed to use Fantasque Sans with ligatures support
+        https://github.com/belluzj/fantasque-sans
+      may check out a good paid font: https://www.myfonts.com/fonts/tabular-type-foundry/codelia/
+
 Optional for various LSP servers
   nodejs 16 & eslint
     sudo apt update
