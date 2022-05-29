@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+firefoxId=$(xdotool search --desktop 0 --onlyvisible --name "Firefox")
+termId=$(xdotool search --class "wez")
+
+xdotool windowfocus "$firefoxId"
+xdotool key super+Left
+
+xdotool windowfocus "$termId"
+xdotool key super+Right
