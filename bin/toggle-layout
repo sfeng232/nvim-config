@@ -1,10 +1,20 @@
 #!/usr/bin/env bash
 
-firefoxId=$(xdotool search --desktop 0 --onlyvisible --name "Firefox")
+firefoxId=$(xdotool search --desktop 0 --onlyvisible --class "firefox")
 termId=$(xdotool search --class "wez")
 
-xdotool windowfocus "$firefoxId"
-xdotool key super+Left
+screen=$(xdotool getdisplaygeometry | tr ' ' 'x')
 
-xdotool windowfocus "$termId"
-xdotool key super+Right
+if xwininfo -id "$termId" -stats | grep geometry | grep -q "$screen"; then
+  # is in fullscreen
+  xdotool windowfocus "$termId" key super+f
+  sleep 1
+  xdotool windowfocus "$firefoxId" \
+    key super+Left \
+    windowfocus "$termId" \
+    key super+Right
+else
+  xdotool windowfocus "$firefoxId" key super+Up
+  xdotool windowfocus "$termId" key super+Up
+  xdotool key super+f
+fi
