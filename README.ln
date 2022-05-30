@@ -67,6 +67,9 @@ Environment
     may check out a good paid font: https://www.myfonts.com/fonts/tabular-type-foundry/codelia/
 
 Optional for various LSP servers
+  disable gnome animation
+    gsettings set org.gnome.desktop.interface enable-animations false
+
   nodejs 16 & eslint
     sudo apt update
     curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
