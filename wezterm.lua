@@ -1,7 +1,10 @@
 -- ~/.config/wezterm/wezterm.lua
 local wezterm = require 'wezterm';
 return {
-  font_size = 13.0,
+  font_size = 17.0,
+  -- ctrl+- and ctrl+= to change
+  -- ctrl+0 to reset
+  --
   font = wezterm.font("Fantasque Sans Mono", {weight="Regular"}),
   -- color_scheme = "Solarized Dark - Patched",
   -- color_scheme = "Batman",
