@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 firefoxId=$(xdotool search --desktop 0 --onlyvisible --class "firefox")
-termId=$(xdotool search --class "wez")
+termId=$(xdotool search --class "wezterm")
 
 screen=$(xdotool getdisplaygeometry | tr ' ' 'x')
 
