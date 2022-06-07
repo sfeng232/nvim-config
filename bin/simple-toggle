@@ -8,5 +8,5 @@
 #    command: Absolute path of this script
 
 current="$(xdotool getwindowfocus getwindowname)"
-nextid="$(wmctrl -l | grep -v ' 1 ' | grep -vF "$current" | cut -d ' ' -f1 | head -n 1)"
+nextid="$(wmctrl -l | sed '/[^ ]*  1 /d' | grep -vF "$current" | cut -d ' ' -f1 | head -n 1)"
 wmctrl -i -a "$nextid"
