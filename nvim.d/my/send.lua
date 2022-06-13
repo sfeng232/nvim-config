@@ -85,7 +85,7 @@ M.get_current_cell = function()
   end
   local lines_tbl = vim.fn.getline(sl, el)
   local lines = table.concat(lines_tbl, "\n") .. "\n"
-  return lines
+  return lines:gsub("^\n", ""):gsub("\n\n$", "\n")
 end
 
 M.yank_current_cell = function()
