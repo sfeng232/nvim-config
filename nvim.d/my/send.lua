@@ -57,34 +57,52 @@ M.send_highlighted_lines = function(dir)
   end
 end
 
--- send a cell like jupyter, cell is separated by empty lines
-M.send_current_cell = function(dir)
-  local sl = vim.fn.search("^$", "bnW")
-  local el = vim.fn.search("^$", "nW")
+M.yank_highlighted_lines = function()
+  vim.cmd([[normal "ay]])
+  local lines = vim.fn.getreg("a")
+  local cb = io.popen("xclip -selection clipboard", "w")
+  cb:write(lines)
+  cb:close()
+end
+
+M.search_cell_edge = function(flag)
+  local l = vim.fn.search("^$", flag .. "W")
+  local ind = vim.fn.indent(l + 1)
+  if ind > 0 and l > 0 then
+    return M.search_cell_edge(flag)
+  else
+    return l
+  end
+end
+
+M.get_current_cell = function()
+  local v = vim.fn.winsaveview()
+  local sl = M.search_cell_edge("b")
+  local el = M.search_cell_edge("")
+  vim.fn.winrestview(v)
   if el == 0 then
     el = vim.fn.line("$")
   end
   local lines_tbl = vim.fn.getline(sl, el)
   local lines = table.concat(lines_tbl, "\n") .. "\n"
-  local cmd = lines
+  return lines
+end
+
+M.yank_current_cell = function()
+  local lines = M.get_current_cell()
+  local cb = io.popen("xclip -selection clipboard", "w")
+  cb:write(lines)
+  cb:close()
+end
+
+-- send a cell like jupyter, cell is separated by empty lines
+M.send_current_cell = function(dir)
+  local cmd = M.get_current_cell()
   if (dir or "next") == "next" then
     M.send_line_to_next_pane(cmd)
   else
     M.send_line_to_prev_pane(cmd)
   end
-end
-
-M.yank_current_cell = function()
-  local sl = vim.fn.search("^$", "bnW")
-  local el = vim.fn.search("^$", "nW")
-  if el == 0 then
-    el = vim.fn.line("$")
-  end
-  local lines_tbl = vim.fn.getline(sl, el)
-  local lines = table.concat(lines_tbl, "\n") .. "\n"
-  local cb = io.popen("xclip -selection clipboard", "w")
-  cb:write(lines)
-  cb:close()
 end
 
 M.run_popup = function(cmd)
