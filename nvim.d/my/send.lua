@@ -74,6 +74,19 @@ M.send_current_cell = function(dir)
   end
 end
 
+M.yank_current_cell = function()
+  local sl = vim.fn.search("^$", "bnW")
+  local el = vim.fn.search("^$", "nW")
+  if el == 0 then
+    el = vim.fn.line("$")
+  end
+  local lines_tbl = vim.fn.getline(sl, el)
+  local lines = table.concat(lines_tbl, "\n") .. "\n"
+  local cb = io.popen("xclip -selection clipboard", "w")
+  cb:write(lines)
+  cb:close()
+end
+
 M.run_popup = function(cmd)
   local cwd = vim.fn.getcwd()
   local fullcmd = "cd " .. cwd .. "; [ -f .envrc ] && source .envrc; " .. cmd
