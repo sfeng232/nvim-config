@@ -897,14 +897,8 @@ snippet unreach "eslint unreach" b
 endsnippet
 
 snippet nav "navframe response" b
-res.json({
-	nav: {
-		frame: "your-frame-name",
-		mixin: "generic-msg",
-		baseUrl: req.baseUrl,
-		flashes: H.allFlashes(req),
-	},
-	msg: true ? "Done" : "Failed",
+res.nav("${1:framename}", "p-$1", {
+	mixinArg1: 123,
 });
 endsnippet
 
