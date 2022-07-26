@@ -108,6 +108,11 @@ snippet cl "console.log" b
 console.log($0);
 endsnippet
 
+snippet	ci "console.log with util.inspect" b
+const util = require('util')
+console.log(util.inspect($0, false, null, true));
+endsnippet
+
 snippet cj "console.log json dump" b
 console.log(JSON.stringify($0, null, 2));
 endsnippet
