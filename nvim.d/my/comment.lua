@@ -3,6 +3,11 @@ if not status_ok then
   return
 end
 
+local ok2, ft = pcall(require, "Comment.ft")
+if not ok2 then
+  return
+end
+
 comment.setup {
   mappings = {
     basic = true,
@@ -28,3 +33,6 @@ comment.setup {
     }
   end,
 }
+
+ft.dart = '//%s'
+ft.pug = '//%s'
