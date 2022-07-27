@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+exec docker exec -it dcpflutter-app-1 flutter $@
