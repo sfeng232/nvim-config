@@ -15,8 +15,8 @@ local on_attach = function(client, bufnr)
   local map = vim.api.nvim_buf_set_keymap
   map(bufnr, "n", "<c-h>", '<cmd>lua vim.diagnostic.goto_prev({ float = false })<cr>', opts)
   map(bufnr, "n", "<c-l>", '<cmd>lua vim.diagnostic.goto_next({ float = false })<cr>', opts)
-  map(bufnr, "n", "<c-[>", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  map(bufnr, "n", "<c-]>", "<cmd>tab split | lua vim.lsp.buf.definition()<CR>", opts)
+  map(bufnr, "n", "<c-m-]>", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+  map(bufnr, "n", "<c-]>", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
   map(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
   map(bufnr, "n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 end
