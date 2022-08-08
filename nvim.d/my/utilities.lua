@@ -14,6 +14,17 @@ _G.run_cmd = function(cmd)
   return output
 end
 
+_G.console_pane_flag = "-b"
+_G.console_pane_flag_toggle = function()
+  if _G.console_pane_flag == "-b" then
+    _G.console_pane_flag = ""
+    print "console is on right"
+  else
+    _G.console_pane_flag = "-b"
+    print "console is on left"
+  end
+end
+
 _G.console_ctl = function(cmd)
   return function()
     local left_pane = run_cmd([[tmux list-panes -F '#{pane_id} #{pane_start_command}' | grep leftpane]])
@@ -28,9 +39,9 @@ _G.console_ctl = function(cmd)
     if string.find(left_pane, subed, 0, true) then
       kill_pane()
     elseif paneId == "" then
-      run_cmd('tmux splitw -dhb -p32 -- ' .. actual_cmd)
+      run_cmd('tmux splitw -dh ' .. _G.console_pane_flag .. ' -p32 -- ' .. actual_cmd)
     else
-      run_cmd('tmux splitw -dvb -t "' .. paneId .. '" -- ' .. actual_cmd)
+      run_cmd('tmux splitw -dv ' .. _G.console_pane_flag .. ' -t "' .. paneId .. '" -- ' .. actual_cmd)
       kill_pane()
     end
   end
