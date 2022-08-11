@@ -2,7 +2,7 @@ local opts = { noremap = true, silent = true }
 -- local term_opts = { silent = true }
 local map = vim.keymap.set
 local cancel = function(tbl, keys)
-  for i, k in pairs(keys) do
+  for _, k in pairs(keys) do
     map(tbl, k, "<nop>", opts)
   end
 end
@@ -51,6 +51,9 @@ map("n", "c*", '*Ncgn', opts)        -- c* to edit word under cursor, repeatable
 map("n", "d*", '*Ndgn', opts)
 map("n", "c.", '<cmd>let @/=@"<cr>/<cr>cgn<c-r>.<esc>', opts)       -- c. to make the last edit repeatable by dot
 map("n", "d.", '<cmd>let @/=@"<cr>/<cr>dgn<c-r>.<esc>', opts)
+map("n", "<leader>u", function()
+  vim.cmd("edit ~/.config/nvim/snippets/" .. vim.bo.filetype .. ".snippets")
+end, opts)
 cancel("n", {">>", "<<", ":", "/", "?", "Q", "qq", "<bs>", "<del>", "<cr>", "<up>", "<down>", "<left>", "<right>"})
 
 -- Insert

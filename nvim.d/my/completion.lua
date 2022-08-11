@@ -13,7 +13,7 @@ if not ok3 then
   return
 end
 
-require("luasnip.loaders.from_snipmate").load()
+require("luasnip.loaders.from_snipmate").lazy_load()
 
 --   פּ ﯟ   some other good icons
 local kind_icons = {
