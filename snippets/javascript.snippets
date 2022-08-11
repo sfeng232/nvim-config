@@ -4,114 +4,90 @@ snippet for "for-in (object)"
 	/* eslint-disable guard-for-in */
 	for (const key in $0) {
 	}
-
 snippet for "for-of (array)"
 	/* eslint-disable fp/no-loops */
 	/* eslint-disable no-restricted-syntax */
 	for (const item of $0) {
 	}
-
 snippet for "for-of (array with index)"
 	/* eslint-disable fp/no-loops */
 	/* eslint-disable no-restricted-syntax */
 	for (const [i, item] of $0.entries()) {
 	}
-
 snippet trx "knex transaction"
 	await knex.transaction(async trx => {
 		await trx
 	});
-
 snippet if
 	if (${1:true}) {
 		$0
 	}
-
 snippet setTimeout "setTimeout function"
 	setTimeout(() => {
 		${VISUAL}$0
 	}, ${1:10});
-
 snippet setInterval "setInterval function"
 	setInterval(() => {
 		$0
 	}, ${1:10});
-
 snippet .forEach "Array.forEach"
 	.forEach((${1:e}) => {
 		$0
 	})
-
 snippet .each "jquery each"
 	.each((i, node) => {
 		$0
 	})
-
 snippet .map "jquery map"
 	.map((i, node) => {
 		$0
 	})
-
 snippet cl "console.log"
 	console.log($0);
-
 snippet	ci "console.log with util.inspect"
 	const util = require('util')
 	console.log(util.inspect($0, false, null, true));
-
 snippet cj "console.log json dump"
 	console.log(JSON.stringify($0, null, 2));
-
 snippet clt "console log time"
 	console.log(new Date());
-
 snippet try "try catch throw"
 	try {
 		${VISUAL}$0
 	} catch (err) {
 		debugger;
 	}
-
 snippet .on "jquery on"
 	.on('${1:click}', '$0', (e) => {
 		const $node = $(e.currentTarget);
 	});
-
 snippet ready "jquery on ready"
 	$(function() {
 		$0
 	});
-
 snippet jshint "jshint globals"
 	/*globals $0*/
-
 snippet on "body on"
 	$('body').on('${1:click}', '$2', $0);
-
 snippet crocks "import crocks"
 	import { map, chain, compose } from "crocks";
-
 snippet todo "todo"
 	// @TODO loki, `date +"%d/%m/%Y"`: $0
-
 snippet promise "new Promise"
 	return new Promise((resolve, reject) => {
 		$0
 	})
-
 snippet onclick "on click"
 	$body.on('click.$1', '[data-$1]', (e) => {
 		const $this = $(e.currentTarget);
 		$this.data('$1')
 	});
-
 snippet onc "on click"
 	onClick('$1', (e) => {
 		const $this = $(e.currentTarget);
 		$this.data('$1')
 		$0
 	})
-
 snippet dragable "mousedown"
 	$body.on('mousedown.$1', '.scale-handle', (e) => {
 		$body.on('mousemove.$1', (me) => {
@@ -122,13 +98,10 @@ snippet dragable "mousedown"
 		})
 		return false
 	})
-
 snippet eslint "eslint-disable"
 	/* eslint-disable $0 */
-
 snippet pret "prettier-ignore"
 	// prettier-ignore
-
 snippet get "express.js get"
 	router.get(
 		"/$1",
@@ -137,7 +110,6 @@ snippet get "express.js get"
 			renderUID(req, res, "Title", "mixinName", {});
 		})
 	);
-
 snippet post "express.js post"
 	router.post(
 		"/$1",
@@ -147,21 +119,18 @@ snippet post "express.js post"
 			res.redirect("back");
 		})
 	);
-
 snippet use "express.js use"
 	router.use(
 		asyncRoute(async (req, res, next) => {
 			next();
 		})
 	);
-
 snippet knex "knex"
 	const {rows: $1} = await knex.raw(\`
 		select
 			*
 		from table
 	\`);
-
 snippet knex "knex with params"
 	const {rows: $1} = await knex.raw(
 		\`
@@ -174,26 +143,20 @@ snippet knex "knex with params"
 		\`,
 		{id: req.params.id},
 	);
-
 snippet pcl "log in pipe"
 	$debug => { console.log($debug); return $debug },
-
 snippet onClick "naf on click"
 	onClick("add", async (data, $node) => {
 	});
-
 snippet onChange "naf on click"
 	onChange("add", async (data, $node) => {
 	});
-
 snippet time "console.time"
 	console.time("$1");
 	${VISUAL}
 	console.timeEnd("$1");
-
 snippet co "console log object"
 	console.log('$1', $1);
-
 snippet pgfn "postgres fn"
 	/* \`
 		select plus1(102)
@@ -203,13 +166,11 @@ snippet pgfn "postgres fn"
 			select s + 1
 		$$ language sql
 	\`);
-
 snippet pginsert "postgres insert"
 	insert into user_profile (name, email) values
 	('loki', 'loki@email.com'),
 	('queen', 'queen@email.com')
 	returning id
-
 snippet tableext "tableExt"
 	const table = await H.tableExt({
 		req,
@@ -234,8 +195,6 @@ snippet tableext "tableExt"
 		\`,
 		sqlParams: {accountId: req.account.id},
 	});
-
-
 snippet pgdo "postgres do block"
 	\`
 		do $$
@@ -246,27 +205,22 @@ snippet pgdo "postgres do block"
 			end
 		$$
 	\`
-
 snippet pglog "postgres log"
 	raise notice '$1 = %', $1;
-
 snippet pgif "postgres if"
 	if a then
 	elsif b then
 	else
 	end if;
-
 snippet pgcase "postgres case"
 	case
 		when condition_1 then result_1
 		else else_result
 	end
-
 snippet mw "middleware"
 	const $0 = asyncRoute(async (req, res, next) => {
 		next();
 	});
-
 snippet table "new table"
 	// ${1:user} table
 	await knex.schema.createTable("$1", (table) => {
@@ -276,153 +230,114 @@ snippet table "new table"
 	await autoUpdatedAt("$1");
 	// down
 	await knex.schema.dropTableIfExists("$1");
-
 snippet cond "cond"
 	R.cond([
 		[R.equals(1), R.identity],
 		[R.T, R.T],
 	]),
-
 snippet m "crocks map"
 	map($0),
-
 snippet pluck "ramda pluck"
 	R.pluck($0),
-
 snippet rif "ifElse"
 	R.ifElse(
 		R.equals(1),
 		R.T,
 		R.F,
 	),
-
 snippet jsonb_@> "@> - check if contain"
 	'{"a":1, "b":2}'::jsonb @> '{"b":2}'::jsonb
-
 snippet jsonb_? "? - check if exists"
 	'{"a":1, "b":2}'::jsonb ? 'b'
-
 snippet jsonb_?| "?| - check if any exists"
 	'{"a":1, "b":2, "c":3}'::jsonb ?| array['b', 'd']
-
 snippet jsonb_?& "?& - check if all exists"
 	'["a", "b", "c"]'::jsonb ?& array['a', 'b']
-
 snippet jsonb_|| "|| - concat"
 	'["a", "b"]'::jsonb || '["a", "d"]'::jsonb
-
 snippet jsonb_- "- - delete one / many"
 	'{"a": "b", "c": "d"}'::jsonb - 'a'
 	'{"a": "b", "c": "d"}'::jsonb - array['a', 'b']
-
 snippet jsonb_#- "#- - delete by path"
 	'["a", {"b":1}]'::jsonb #- '{1,b}'
-
 snippet jsonb_@? "@? - check exists by jsonpath"
 	'{"a":[1,2,3,4,5]}'::jsonb @? '$.a[*] ? (@ > 2)'
-
 snippet jsonb_@@ "@@ - run jsonpath predicate"
 	'{"a":[1,2,3,4,5]}'::jsonb @@ '$.a[*] > 2'
-
 snippet jsonb_to "to_jsonb - anyelement to json"
 	to_jsonb($0)
-
 snippet jsonb_build_object "jsonb_build_object - build json"
 	jsonb_build_object('key1', 'value1')
-
 snippet jsonb_array_elements "jsonb_array_elements - json to rows"
 	select * from jsonb_array_elements('[1,true, [2,false]]')
 	select * from jsonb_array_elements_text('["foo", "bar"]')
-
 snippet jsonb_to_recordset "jsonb_to_recordset"
 	jsonb_to_recordset(:jsonb) as r(name string, price int)
-
 snippet jsonb_array_length "jsonb_array_length - build json"
 	jsonb_array_length($0)
-
 snippet jsonb_each "jsonb_each - json obj (kv pair) to rows"
 	select * from jsonb_each('{"a":"1", "b":"2"}')
 	select * from jsonb_each_text('{"a":"1", "b":"2"}')
-
 snippet jsonb_extract_path "jsonb_extract_path - get with variadic path"
 	jsonb_extract_path('{"a":{"b":1}}', 'a', 'b')
 	jsonb_extract_path_text('{"a":{"b":1}}', 'a', 'b')
-
 snippet jsonb_object_keys "jsonb_object_keys - get keys"
 	jsonb_object_keys($0)
-
 snippet jsonb_set "jsonb_set - update json by path"
 	jsonb_set('[{"a":1}]', '{0,a}', '[2,3,4]')
-
 snippet jsonb_insert "jsonb_insert - insert element to json array"
 	jsonb_insert('{"a": [0,2,3]}', '{a, 1}'::text[], '1')
-
 snippet jsonb_move "jsonb_move - insert element within jsonb array"
 	jsonb_move('[0, 1, 2, 3, 4, 5, 6]'::jsonb, 2, 4)
-
 snippet jsonb_strip_nulls "jsonb_strip_nulls - remote nulls (object only)"
 	jsonb_strip_nulls('{"a":1, "b":null}')
-
 snippet jsonb_path_exists "jsonb_path_exists - check if exists by jsonpath and a json parameters"
 	jsonb_path_exists('{"a":[1,2,3,4,5]}', '$.a[*] ? (@ >= $min && @ <= $max)', '{"min":2, "max":4}')
-
 snippet jsonb_path_match "jsonb_path_match - check jsonpath predicate with a json parameters"
 	jsonb_path_match('{"a":[1,2,3,4,5]}', 'exists($.a[*] ? (@ >= $min && @ <= $max))', '{"min":2, "max":4}')
-
 snippet jsonb_path_query "jsonb_path_query - get by jsonpath and a json parameters"
 	jsonb_path_query('{"a":[1,2,3,4,5]}', '$.a[*] ? (@ >= $min && @ <= $max)', '{"min":2, "max":4}')
 		#=> rows
 	jsonb_path_query_array #=> jsonb array
 	jsonb_path_query_first #=> first match
-
 snippet jsonb_agg "jsonb_agg - aggregate as jsonb array"
 	jsonb_agg($0)
-
 snippet jsonb_object_agg "jsonb_object_agg - aggregate as jsonb object"
 	jsonb_object_agg($0, $1)
-
 snippet aa "anonymous async (for testing js)"
 	const fn1 = async () => {
 		$0
 		return 123;
 	};
 	fn1().then(console.log);
-
 snippet reduce "ramda reduce"
 	R.reduce((arr, item) => R.append(item, arr), [], [1, 2, 3, 4])
-
 snippet dev "eslint disable import"
 	/* eslint-disable import/no-extraneous-dependencies */
 	/* eslint-disable no-unused-vars */
 	/* eslint-disable no-debugger */
 	/* eslint-disable no-useless-concat */
 	/* eslint-disable no-unreachable */
-
 snippet jq "enable jq write functions"
 	/* eslint-disable jquery/no-class, jquery/no-val */
 	/* eslint-disable jquery/no-attr, jquery/no-prop, jquery/no-css */
 	/* eslint-disable jquery/no-text, jquery/no-html, jquery/no-ready, jquery/no-submit */
-
 snippet Async "crocks Async"
 	Async((rej, res) => {
 		$0
 	});
-
 snippet unreach "eslint unreach"
 	/* eslint-disable no-unreachable */
-
 snippet nav "navframe response"
 	res.nav("${1:framename}", "p-$1", {
 		mixinArg1: 123,
 	});
-
 snippet readyaml "readyaml"
 	const data = yaml.safeLoad(
 		fs.readFileSync("notes/stripe.invoice.payment_succeeded.txt", "utf8"),
 		{}
 	);
 	console.log(data);
-
 snippet values "b"
 	select
 		*
@@ -430,24 +345,19 @@ snippet values "b"
 		(1, 'one'),
 		(2, 'two')
 	) as t (num,letter)
-
 snippet delay "delay def and call"
 	const delay = (ms) => new Promise((resolve) => {setTimeout(resolve, ms)});
 	await delay(500);
-
 snippet `` "sql test"
 	/* \`
 		-- expand
 		select 1$0
 	\` */
-
 snippet rec "record ob
 	recordObj(${VISUAL})$0
-
 snippet throw "throw error"
 	/* eslint-disable no-unreachable */
 	throw new Error("$0");
-
 snippet pgtest "A quick playground for postgres"
 	console.log(\`
 		drop table if exists testtbl;
@@ -461,7 +371,6 @@ snippet pgtest "A quick playground for postgres"
 	console.log(\`
 		alter table testtbl drop column price
 	\`);
-
 snippet pg "pg test with console.log"
 	console.log(\`
 		-- expand

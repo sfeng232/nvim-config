@@ -4,7 +4,6 @@ snippet sel "select"
 		from t1
 		join t2 on t1.xxx = t2.xxx
 	\;
-
 snippet insert "insert"
 	insert into
 		$0 (name)
@@ -12,19 +11,14 @@ snippet insert "insert"
 		('name1'),
 		('name2')
 	\;
-
 snippet add "add table column"
 	alter table customers add column phone varchar;
-
 snippet drop "drop table"
 	drop table $0;
-
 snippet drop "drop table column"
 	alter table customers drop column phone;
-
 snippet drop "drop foreign key constraint"
 	alter table zone drop constraint zone_floor_id_foreign;
-
 snippet case "case"
 	case
 		when condition_1 then result_1
