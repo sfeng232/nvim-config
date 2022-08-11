@@ -1,0 +1,10 @@
+snippet head "head"
+	${1:HEAD}
+	${1/./=/g}
+
+snippet subhead "subhead"
+	${1:SUBHEAD}
+	${1/./-/g}
+
+snippet link "link"
+	[${1:${VISUAL}}]($0)

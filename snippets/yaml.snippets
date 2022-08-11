@@ -1,0 +1,16 @@
+snippet compose "docker compose base" b
+	${1:container_name}:
+		container_name: $1
+		restart: always
+		image: $2
+		tty: true
+		net: host
+		# command:
+		# environment:
+		#   - RAILS_ENV=production
+		# volumes:
+		#   - /path-on-host:/path-on-container
+		# links:
+		#   - ansible-server
+		# ports:
+		#   - "host:container"

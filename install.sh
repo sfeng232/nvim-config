@@ -33,14 +33,14 @@ fi
 rm -rf \
   ~/.config/nvim/init.lua \
   ~/.config/nvim/lua \
-  ~/.config/nvim/UltiSnips \
+  ~/.config/nvim/snippets \
   ~/.tmux.conf \
   ~/.config/kitty/kitty.conf \
   ~/.config/wezterm/wezterm.lua
 
 ln -s `pwd`/vimrc.lua ~/.config/nvim/init.lua
 ln -s `pwd`/nvim.d ~/.config/nvim/lua
-ln -s `pwd`/UltiSnips ~/.config/nvim/UltiSnips
+ln -s `pwd`/snippets ~/.config/nvim/snippets
 ln -s `pwd`/tmux.conf ~/.tmux.conf
 [ -d ~/.config/kitty ] && ln -s `pwd`/kitty.conf ~/.config/kitty/kitty.conf
 [ -d ~/.config/wezterm ] && ln -s `pwd`/wezterm.lua ~/.config/wezterm/wezterm.lua

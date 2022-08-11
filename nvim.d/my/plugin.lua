@@ -77,6 +77,7 @@ packer.startup(function(use, use_rocks)
   use 'Xuyuanp/scrollbar.nvim'
 
   -- Completion
+  use "L3MON4D3/LuaSnip"
   use "hrsh7th/nvim-cmp"
   -- use {"hrsh7th/nvim-cmp", commit = "dbc72290295cfc63075dab9ea635260d2b72f2e5"}
   use "hrsh7th/cmp-buffer"
@@ -85,8 +86,7 @@ packer.startup(function(use, use_rocks)
   use "hrsh7th/cmp-nvim-lsp"
   use "hrsh7th/cmp-nvim-lua"
   use "lukas-reineke/cmp-rg"
-  use "SirVer/ultisnips"
-  use "quangnguyen30192/cmp-nvim-ultisnips"
+  use "saadparwaiz1/cmp_luasnip"
 
   -- LSP
   use "neovim/nvim-lspconfig"

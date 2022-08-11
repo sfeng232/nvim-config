@@ -1,0 +1,39 @@
+snippet fun "New function"
+	function ${1:new_function}(${2:args})
+		 $0
+	end
+
+snippet forp "pair for loop"
+	for ${1:name},${2:val} in pairs(${3:table_name}) do
+		 $0
+	end
+
+snippet fori "ipair for foop"
+	for ${1:idx},${2:val} in ipairs(${3:table_name}) do
+		 $0
+	end
+
+snippet for "numeric for loop"
+	for ${1:i}=${2:first},${3:last}${4/^..*/(?0:,:)/}${4:step} do
+		 $0
+	end
+
+snippet local "local x =
+	local ${1:x} = ${0:1}
+
+snippet req "require with pcal
+	local status_ok, $1 = pcall(require, "${1}")
+	if not status_ok then
+		return
+	end
+
+snippet au "autocmd with group"
+	local pyaugroup = vim.api.nvim_create_augroup("pyaugroup", {clear = true})
+	vim.api.nvim_create_autocmd({"BufWritePre"}, {
+		group = pyaugroup,
+		pattern = "*.py",
+		callback = function()
+			$0
+			vim.lsp.buf.formatting_sync(nil, 200)
+		end
+	})
