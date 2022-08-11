@@ -43,6 +43,7 @@ div(style="\
 	grid-column-gap: 1rem;\
 	align-items: baseline;\
 ")
+endsnippet
 
 snippet table "table" b
 table.table
@@ -54,4 +55,110 @@ table.table
 		tr
 			td Cell
 			td Cell
+endsnippet
+
+snippet select "select" b
+label ${1/\w/\u$0/}
+	+select({
+		options: [
+			["code", "Label"]
+		],
+		selected: val(["$1"])
+	}).mys(name="${1:type}")
+endsnippet
+
+snippet col "col" b
+mixin colActions({row, value}) "colActions({row, value})" b
+	+post-btn({
+		url: `\${baseUrl}/customers/\${row._id}/delete`,
+		confirm: "Are you sure to delete this account?",
+		label: "Delete",
+	}).btn4.blue
+endsnippet
+
+snippet tableext "tableext" b
+mixin colActions({row, value})
+	+post-btn({
+		url: `\${baseUrl}/customers/\${row._id}/delete`,
+		confirm: "Are you sure to delete this account?",
+		label: "Delete",
+	}).btn4.blue
+
++table-ext({
+	table: accounts,
+	columns: {
+		actions: "colActions",
+	},
+})
+	.flex-r-jsb-ac
+		h3 Accounts
+		div
+			button.btn4.mr3.blue(
+				data-submenu={
+					mixin: "p-new-account",
+					dir: "bottom-left",
+					data: {a: 1},
+				}
+			) New account
+endsnippet
+
+snippet mobileRow "mobileRow" b
+mixin mobileRow(row, idx)
+	.px3.py2.flex-r-jsb-ac(
+		style=idx > 0 ? "border-top: 1px solid #ccc;" : ""
+	)
+		div= row.name
+
+// in tableext
+	onlyPaging: isMobile,
+	mobileRow: "mobileRow",
+endsnippet
+
+snippet data-navframe "data-navframe" b
+data-navframe={
+	name: "framename",
+	url: `\${baseUrl}/frameurl`,
+	// dir: "center",
+	// msg: "Loading data ...",
+	// width: 600,
+	// style: false,
+	// outside: false,
+}
+endsnippet
+
+snippet data-submenu-edit-one-value "data-submenu-edit-one-value" b
+data-submenu={
+	mixin: "p-edit-one-value",
+	data: {
+		url: `\${baseUrl}/...post url...`,
+		value: "current value",
+		type: "text",
+		name: `Input name`,
+	},
+}
+endsnippet
+
+snippet data-submenu "data-submenu" b
+data-submenu={
+	mixin: "p-edit-one-value",
+	data: {
+		url: `\${baseUrl}/submiturl`,
+		value: "currentvalue",
+		type: "text",
+		name: "Item name",
+	},
+}
+endsnippet
+
+snippet post-btn "post-btn" b
++post-btn({
+	url: \`\${baseUrl}/update\`,
+	data: {},
+	confirm: "Are you sure?",
+	label: "Submit",
+}).btn1
+endsnippet
+
+snippet __ "__" b
+__("$0")
 endsnippet
