@@ -53,9 +53,9 @@ snippet clt "console log time"
 	console.log(new Date());
 snippet try "try catch throw"
 	try {
-		${VISUAL}$0
+		${0:${VISUAL}}
 	} catch (err) {
-		debugger;
+		// handle err
 	}
 snippet .on "jquery on"
 	.on('${1:click}', '$0', (e) => {
