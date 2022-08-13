@@ -51,6 +51,7 @@ packer.init {
 -- Install your plugins here
 packer.startup(function(use, use_rocks)
   use_rocks 'lua-cjson'
+  use_rocks 'f-strings'
 
   use "wbthomason/packer.nvim"          -- Have packer manage itself
   use "nvim-lua/popup.nvim"             -- An implementation of the Popup API from vim in Neovim
