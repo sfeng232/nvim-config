@@ -50,6 +50,7 @@ packer.init {
 
 -- Install your plugins here
 packer.startup(function(use, use_rocks)
+  -- if not auto-installed, install with command      :PackerRocks install f-strings
   use_rocks 'lua-cjson'
   use_rocks 'f-strings'
 
