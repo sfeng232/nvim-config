@@ -10,6 +10,7 @@ How to use this repo
   read every files, modify and experiment
 
 General key bindings (applied to both vim and tmux)
+  Ctrl-j / k     = indent / outdent highlighted lines (vim visual mode only)
   Ctrl-j         = accept / confirm / open (similar to <cr>)
   Alt-j / k      = move in finder (nvim-cmp, telescope, and fzf)
   Alt-H / L      = move in tmux windows
