@@ -125,12 +125,6 @@ snippet use "express.js use"
 			next();
 		})
 	);
-snippet knex "knex"
-	const {rows: $1} = await knex.raw(`
-		select
-			*
-		from table
-	`);
 snippet knex "knex with params"
 	const {rows: $1} = await knex.raw(
 		`
