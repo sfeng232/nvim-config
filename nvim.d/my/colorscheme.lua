@@ -20,8 +20,8 @@ vim.cmd "hi tablinesel gui=none guifg=#ffffff guibg=#666666"
 
 vim.g.cursorline_timeout = 800
 
-local status_ok, indent_blankline = pcall(require, "indent_blankline")
-if not status_ok then
+local ok2, indent_blankline = pcall(require, "indent_blankline")
+if not ok2 then
 	return
 end
 
@@ -106,3 +106,12 @@ vim.cmd [[
     autocmd WinLeave,BufLeave,BufWinLeave,FocusLost,QuitPre,TabLeave * silent! lua require('scrollbar').clear()
   augroup end
 ]]
+
+require 'colorizer'.setup {
+  '*';
+  scss = {
+    css      = true;   -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+    css_fn   = true;   -- Enable all CSS *functions*: rgb_fn, hsl_fn
+    mode     = 'background';
+  };
+}
