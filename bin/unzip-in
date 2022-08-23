@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+if [[ "$1" = "" ]]; then
+  echo "Usage: unzip-in <zipfile>"
+  exit 1
+fi
+
+filename="$1"
+dirname=`basename "$filename" .zip`
+
+echo mkdir -p "$dirname"
+mkdir -p "$dirname"
+
+unzip "$filename" -d "$dirname"
+rm "$filename"
+
+echo "removed $filename, content extracted to $dirname"
