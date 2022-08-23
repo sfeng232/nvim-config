@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+if [[ "$1" = "" ]]; then
+  echo "Usage: rm-unzipped <zipfile>"
+  exit 1
+fi
+
+if [[ "$2" = "" ]]; then
+  unzip -vl "$1" | grep '% ' | sed '$ d' | awk '{print $NF}'
+  echo
+  echo "call below command to actually remove them"
+  echo "  " rm-unzipped "$1" 1
+else
+  unzip -vl "$1" | grep '% ' | sed '$ d' | awk '{print $NF}' | xargs rm -rf
+fi
