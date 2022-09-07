@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+filename="$1"
+
+if [[ "$filename" = "" ]]; then
+  echo "Usage:"
+  echo "  cd the-file-parent-dir; serve-a-file myfile.zip"
+  echo
+  echo "This script will:"
+  echo "  1. build an index.html with a QR code to download in your file"
+  echo "  2. start a http server to serve files in the current directory"
+  echo "  3. open the web page in your local browser"
+  echo "  4. ctrl-c to kill the http server and auto remove index.html"
+  exit 1
+fi
+
+default_nic=$(ip r | grep '^default' | sed -e 's/.* dev //' | awk '{print $1}')
+host_ip=$(ip r | grep "dev $default_nic" | grep src | head -n1 | sed -e 's/.* src //' | awk '{print $1}')
+
+filepath="http://$host_ip:18080/$1"
+
+# auto version detection
+# https://www.qrcode.com/en/about/version.html
+
+# Light error correction as it should always be clean to scan
+# https://www.qrcode.com/en/about/error_correction.html
+
+echo '
+<html>
+  <head>
+  </head>
+  <body>
+    <div style="height: 100vh; display: flex; flex-flow: column; align-items: center; justify-content: center">
+      <div id="placeHolder"></div>
+      <a href="'$filepath'" target="_blank">'$filepath'</div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js" integrity="sha512-ZDSPMa/JM1D+7kdg2x3BsruQ6T/JpJo3jWDWkCZsP+5yVyp1KfESqLI+7RqB5k24F7p2cV7i2YHh/890y6P6Sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+      var typeNumber = 0;
+      var errorCorrectionLevel = "L";
+      var qr = qrcode(typeNumber, errorCorrectionLevel);
+      qr.addData("'$filepath'");
+      qr.make();
+      document.getElementById("placeHolder").innerHTML = qr.createImgTag();
+    </script>
+  </body>
+</html>
+' > index.html
+
+docker run --name file-server-quick \
+  -p 18080:80 --rm \
+  -v "`pwd`:/usr/share/nginx/html:ro" \
+  -e NGINX_UID="$(id -u)" \
+  -e CONFIG="
+    workers: 1
+    servers:
+    - port: 80
+      locations:
+      - name: /
+        add_headers:
+          Access-Control-Allow-Origin: '*'
+        alias: /usr/share/nginx/html/" lokikl/eznginx &
+
+xdg-open "http://localhost:18080/"
+
+trap "trap - SIGTERM && rm index.html && kill -- -$$" SIGINT SIGTERM EXIT
+wait
