@@ -242,7 +242,7 @@ snippet rif "ifElse"
 snippet jsonb_@> "@> - check if contain"
 	'{"a":1, "b":2}'::jsonb @> '{"b":2}'::jsonb
 snippet jsonb_? "? - check if exists"
-	'{"a":1, "b":2}'::jsonb ? 'b'
+	'{"a":1, "b":2}'::jsonb \\? 'b'
 snippet jsonb_?| "?| - check if any exists"
 	'{"a":1, "b":2, "c":3}'::jsonb ?| array['b', 'd']
 snippet jsonb_?& "?& - check if all exists"
