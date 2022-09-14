@@ -9,5 +9,5 @@
 
 currentdecimal=`xdotool getwindowfocus`
 current=$(printf '%x\n' $currentdecimal)
-nextid="$(wmctrl -l | sed '/[^ ]*  1 /d' | grep -vF $current | cut -d ' ' -f1 | head -n 1)"
+nextid="$(wmctrl -l | grep '  0 ' | sed '/[^ ]*  1 /d' | grep -vF $current | cut -d ' ' -f1 | head -n 1)"
 wmctrl -i -a "$nextid"
