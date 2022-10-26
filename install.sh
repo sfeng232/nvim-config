@@ -36,7 +36,10 @@ rm -rf \
   ~/.config/nvim/snippets \
   ~/.tmux.conf \
   ~/.config/kitty/kitty.conf \
-  ~/.config/wezterm/wezterm.lua
+  ~/.config/wezterm/wezterm.lua \
+  ~/.config/nvim/ftdetect \
+  ~/.config/nvim/ftplugin \
+  ~/.config/nvim/syntax
 
 ln -s `pwd`/vimrc.lua ~/.config/nvim/init.lua
 ln -s `pwd`/nvim.d ~/.config/nvim/lua
