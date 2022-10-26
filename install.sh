@@ -40,6 +40,9 @@ rm -rf \
 
 ln -s `pwd`/vimrc.lua ~/.config/nvim/init.lua
 ln -s `pwd`/nvim.d ~/.config/nvim/lua
+ln -s `pwd`/ftdetect ~/.config/nvim/ftdetect
+ln -s `pwd`/ftplugin ~/.config/nvim/ftplugin
+ln -s `pwd`/syntax ~/.config/nvim/syntax
 ln -s `pwd`/snippets ~/.config/nvim/snippets
 ln -s `pwd`/tmux.conf ~/.tmux.conf
 [ -d ~/.config/kitty ] && ln -s `pwd`/kitty.conf ~/.config/kitty/kitty.conf
