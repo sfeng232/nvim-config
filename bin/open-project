@@ -33,5 +33,5 @@ if ! tmux list-windows -F "#W" | grep -q "^${projName}$"; then
   tmux new-window -n $projName "$cmd"
 fi
 
-tmux switch-client
+# tmux switch-client
 tmux select-window -t $projName
