@@ -61,7 +61,9 @@ end
 M.send_highlighted_lines = function(dir)
   vim.cmd([[normal "ay]])
   local cmd = vim.fn.getreg("a")
-  if (dir or "next") == "next" then
+  if (dir or "--") == "--" then
+    M.send_line_to_next_or_prev_pane(cmd)
+  elseif dir == "next" then
     M.send_line_to_next_pane(cmd)
   else
     M.send_line_to_prev_pane(cmd)
