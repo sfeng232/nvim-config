@@ -30,9 +30,20 @@ M.send_line_to_next_pane = function(line)
   M.send_line_to_pane(line, pane)
 end
 
+M.send_line_to_next_or_prev_pane = function(line)
+  local pane = M.run_shell("tmux list-panes | grep active -A1 | sed -n 2p"):gsub(": .*", "")
+  if pane == "" then
+    M.send_line_to_prev_pane(line)
+  else
+    M.send_line_to_pane(line, pane)
+  end
+end
+
 M.send_current_line = function(dir)
   local line = vim.api.nvim_get_current_line() .. "\n"
-  if (dir or "next") == "next" then
+  if (dir or "--") == "--" then
+    M.send_line_to_next_or_prev_pane(line)
+  elseif dir == "next" then
     M.send_line_to_next_pane(line)
   else
     M.send_line_to_prev_pane(line)
