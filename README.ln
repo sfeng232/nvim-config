@@ -55,6 +55,8 @@ Environment
   wezterm with ligatures support
     download and install from the deb file
       https://wezfurlong.org/wezterm/install/linux.html
+      wget https://github.com/wez/wezterm/releases/download/20220905-102802-7d4b8249/wezterm-20220905-102802-7d4b8249.Ubuntu20.04.deb
+      sudo dpkg -i wezterm-20220905-102802-7d4b8249.Ubuntu20.04.deb
 
   terminal font with ligatures support
     https://github.com/belluzj/fantasque-sans/releases/latest
