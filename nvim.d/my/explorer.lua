@@ -20,8 +20,8 @@ nvim_tree.setup {
   sort_by = "name",
   update_cwd = false,
   view = {
-    width = 60,
-    height = 30,
+    width = 100,
+    --[[ height = 30, ]]
     side = "left",
     number = false,
     relativenumber = false,
