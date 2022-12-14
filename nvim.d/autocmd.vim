@@ -27,6 +27,8 @@ au FileType zsh vnoremap <silent> <m-r> <esc>
   \ :'<,'>w ! zsh-run<cr>
   \ :r /tmp/mytmp.zsh.out<cr>
 
+au BufNewFile,BufRead *.uplugin set ft=json
+
 au FileType python noremap <silent> <m-r> :w ! python<cr>
 au FileType sh noremap <silent> <m-r> :w ! sh<cr>
 au! BufNewFile,BufRead *.ln set filetype=lokinote
