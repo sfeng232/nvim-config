@@ -50,7 +50,7 @@ end
 
 _G.exec_in_split = function(cmd, tmux_arg)
   local cmd2 = "echo " .. cmd .. "; " .. cmd
-  local cmd3 = "tmux splitw " .. (tmux_arg or "") .. " \"zsh -c '" .. cmd2 .. "'\""
+  local cmd3 = "tmux splitw " .. (tmux_arg or "") .. " \"zsh -c '[ -f .envrc ] && source .envrc;" .. cmd2 .. "'\""
   run_cmd(cmd3)
 end
 
