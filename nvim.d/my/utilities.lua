@@ -8,7 +8,7 @@ if status_ok then
 end
 
 _G.run_cmd = function(cmd)
-  local handle = io.popen(cmd)
+  local handle = io.popen(cmd .. " 2>&1")
   local output = handle:read("*a")
   handle:close()
   return output
