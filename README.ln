@@ -47,9 +47,9 @@ Environment
   fzf: for project switching (tmux)
     sudo apt-get install fzf
 
-  tmux 3.2
-    sudo apt-get remove tmux
-    download and extract tmux-3.2a.tar.gz at https://github.com/tmux/tmux/releases
+  tmux
+    download and extract latest tmux-xxx.tar.gz at https://github.com/tmux/tmux/releases
+    sudo apt install libevent-dev
     ./configure && make && sudo make install
 
   wezterm with ligatures support
