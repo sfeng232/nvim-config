@@ -49,7 +49,7 @@ Environment
 
   tmux
     download and extract latest tmux-xxx.tar.gz at https://github.com/tmux/tmux/releases
-    sudo apt install libevent-dev
+    sudo apt install libevent-dev libncurses-dev
     ./configure && make && sudo make install
 
   wezterm with ligatures support
