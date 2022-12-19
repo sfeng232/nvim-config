@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-if nvim --version | head -n1 | grep -vq 0.7; then
-  echo "expected nvim 0.7, aborting..."
+if nvim --version | head -n1 | grep -vq 0.9; then
+  echo "expected nvim 0.9, aborting..."
   exit 1
 fi
 
@@ -10,8 +10,8 @@ if pip3 list | grep pynvim | grep -vq pynvim; then
   exit 1
 fi
 
-if tmux -V | grep -vq 3.2; then
-  echo "expected tmux 3.2, aborting..."
+if tmux -V | grep -vq 3.3a; then
+  echo "expected tmux 3.3a, aborting..."
   exit 1
 fi
 
@@ -29,6 +29,8 @@ if ! which fzf > /dev/null; then
   echo "fzf not found, aborting..."
   exit 1
 fi
+
+mkdir -p ~/.config/nvim
 
 rm -rf \
   ~/.config/nvim/init.lua \

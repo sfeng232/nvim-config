@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# simple toggle the first two windows, most likely it's the terminal and chrome
+
+# best fit for ubuntu 22.04 shortcut
+# open Settings > Keyboard Shortcuts > add custom shortcut
+#    key: Ctrl + Space
+#    command: Absolute path of this script
+
+# to get wm class, alt+f2 then execute lg (looking glass)
+# global.context.unsafe_mode = true
+
+gdbus call \
+  --session \
+  --dest org.gnome.Shell \
+  --object-path /org/gnome/Shell \
+  --method org.gnome.Shell.Eval "
+    const wins = global.get_window_actors().map(a=>a.meta_window).filter(a=>a.window_type === 0);
+    const idx = (wins.findIndex(w=>w.has_focus()) + 1) % wins.length;
+    wins[idx].activate(0);
+    " | cut -d'"' -f2
