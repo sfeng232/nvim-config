@@ -30,6 +30,7 @@ Environment
     sudo apt-get install python3
     sudo ln -s /usr/bin/python3 /usr/local/bin/python    # required by luarock
     pip3 install --user --upgrade pynvim
+    (in vim) <leader>ps    # to sync the packer cache
 
   build essential packages for compiling fzf-native
     ubuntu
