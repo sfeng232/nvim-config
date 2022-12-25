@@ -26,10 +26,9 @@ Environment
     sudo mv nvim.appimage /usr/local/bin/nvim
     sudo chmod +x /usr/local/bin/nvim
 
-  pynvim for auto-install lua packages within nvim
-    although nvim 0.7 uses python3, but seems packer/hererocks need python2
-    apt-get install python python3.8
-    pip install --user --upgrade pynvim
+  luarocks & pynvim
+    sudo apt-get install python3
+    sudo ln -s /usr/bin/python3 /usr/local/bin/python    # required by luarock
     pip3 install --user --upgrade pynvim
 
   build essential packages for compiling fzf-native
