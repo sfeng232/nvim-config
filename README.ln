@@ -24,6 +24,12 @@ Environment
   libssl.so is missing (ubuntu 22.04)
     wget http://nz2.archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.16_amd64.deb
     sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2.16_amd64.deb
+
+  nodejs 18, eslint
+    curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+    sudo apt-get install nodejs
+    sudo npm install -g eslint
+
   neovim
     download latest nvim.appimage from https://github.com/neovim/neovim/releases
     sudo mv nvim.appimage /usr/local/bin/nvim
@@ -76,12 +82,6 @@ Environment
 Optional for various LSP servers
   disable gnome animation
     gsettings set org.gnome.desktop.interface enable-animations false
-
-  nodejs 16 & eslint
-    sudo apt update
-    curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
-    sudo apt install -y nodejs
-    sudo npm install -g eslint
 
   rust
     curl --tlsv1.2 -sSf https://sh.rustup.rs | sh
