@@ -21,12 +21,10 @@ local on_attach = function(client, bufnr)
   map(bufnr, "n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-
 lsp_installer.on_server_ready(function(server)
   local opts = {
     on_attach = on_attach,
-    capabilities = cmp_nvim_lsp.update_capabilities(capabilities),
+    capabilities = cmp_nvim_lsp.default_capabilities(),
   }
 
   -- refs for all LSP servers

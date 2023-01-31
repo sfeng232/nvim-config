@@ -26,8 +26,9 @@ Environment
     sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2.16_amd64.deb
 
   nodejs 18, eslint
+    sudo apt remove nodejs libnode-dev libnode72
     curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-    sudo apt-get install nodejs
+    sudo apt install -y nodejs
     sudo npm install -g eslint
 
   neovim
