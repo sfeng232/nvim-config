@@ -10,6 +10,8 @@ if not ok3 then return end
 local ok4, null_ls = pcall(require, "null-ls")
 if not ok4 then return end
 
+--[[ tail -f  ~/.local/state/nvim/lsp.log ]]
+
 local on_attach = function(client, bufnr)
   local opts = { noremap = true, silent = true }
   local map = vim.api.nvim_buf_set_keymap
