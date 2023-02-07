@@ -13,10 +13,6 @@ nvim_tree.setup {
   hijack_cursor = false,
   hijack_netrw = true,
   hijack_unnamed_buffer_when_opening = false,
-  ignore_buffer_on_setup = false,
-  open_on_setup = false,
-  open_on_setup_file = false,
-  open_on_tab = false,
   sort_by = "name",
   update_cwd = false,
   view = {
@@ -51,11 +47,6 @@ nvim_tree.setup {
     dotfiles = false,
     custom = {},
     exclude = {},
-  },
-  ignore_ft_on_setup = {
-    "startify",
-    "dashboard",
-    "alpha",
   },
   diagnostics = {
     enable = true,
