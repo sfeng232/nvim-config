@@ -160,3 +160,5 @@ null_ls.setup {
     diagnostics.flake8,
   },
 }
+
+require("flutter-tools").setup{} -- use defaults

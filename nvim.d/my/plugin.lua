@@ -155,6 +155,8 @@ packer.startup(function(use, use_rocks)
   -- noremap <Leader>t# :Tabularize /#<cr>
   -- noremap <Leader>t> :Tabularize /=><cr>
 
+  use {'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim'}
+
   use({
     "iamcco/markdown-preview.nvim",
     run = "cd app && npm install",
