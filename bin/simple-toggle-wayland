@@ -10,13 +10,19 @@
 # to get wm class, alt+f2 then execute lg (looking glass)
 # global.context.unsafe_mode = true
 
+# meta_window. title / get_wm_class()
+
 gdbus call \
   --session \
   --dest org.gnome.Shell \
   --object-path /org/gnome/Shell \
   --method org.gnome.Shell.Eval "
     const wins = global.get_window_actors().map(a=>a.meta_window)
-      .filter(a=>a.window_type === 0 && a.get_workspace().active);
+      .filter(
+        a=>a.window_type === 0 &&
+        a.get_workspace().active &&
+        a.get_wm_class() != 'app'
+      );
     const idx = (wins.findIndex(w=>w.has_focus()) + 1) % wins.length;
     wins[idx].activate(0);
     " | cut -d'"' -f2
