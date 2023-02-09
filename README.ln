@@ -22,8 +22,9 @@ General key bindings (applied to both vim and tmux)
 
 Environment
   libssl.so is missing (ubuntu 22.04)
-    wget http://nz2.archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.16_amd64.deb
-    sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2.16_amd64.deb
+    wget http://nz2.archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.17_amd64.deb
+    sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2.17_amd64.deb
+    rm *.deb
 
   nodejs 18, eslint
     sudo apt remove nodejs libnode-dev libnode72
