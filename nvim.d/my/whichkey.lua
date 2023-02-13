@@ -137,12 +137,11 @@ local mappings = {
       "Hover",
     },
     h = {
-      -- "<cmd>lua vim.lsp.buf.hover()<cr>",
-      "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>",
-      "Show current line diagnostic",
+      "<cmd>lua vim.diagnostic.open_float()<cr>",
+      "Show current line issues",
     },
     l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
-    q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
+    q = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
     r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
     s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
     S = {
