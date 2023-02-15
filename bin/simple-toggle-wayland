@@ -12,6 +12,22 @@
 
 # meta_window. title / get_wm_class()
 
+if [[ "$1" = "list" ]]; then
+  gdbus call \
+    --session \
+    --dest org.gnome.Shell \
+    --object-path /org/gnome/Shell \
+    --method org.gnome.Shell.Eval "
+      global.get_window_actors().map(a=>a.meta_window)
+        .filter(
+          a=>a.window_type === 0 &&
+          a.get_workspace().active
+        )
+        .map(a=>[a.get_wm_class(), a.title])
+      "
+  exit 0
+fi
+
 gdbus call \
   --session \
   --dest org.gnome.Shell \
@@ -21,7 +37,8 @@ gdbus call \
       .filter(
         a=>a.window_type === 0 &&
         a.get_workspace().active &&
-        a.get_wm_class() != 'app'
+        a.get_wm_class() != 'app' &&
+        a.get_wm_class() != 'UnrealEditor'
       );
     const idx = (wins.findIndex(w=>w.has_focus()) + 1) % wins.length;
     wins[idx].activate(0);
