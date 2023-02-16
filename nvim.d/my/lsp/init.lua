@@ -20,7 +20,6 @@ local on_attach = function(client, bufnr)
   map(bufnr, "n", "<c-m-]>", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
   map(bufnr, "n", "<c-]>", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
   map(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-  map(bufnr, "n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 end
 
 lsp_installer.on_server_ready(function(server)
