@@ -127,14 +127,14 @@ snippet use "express.js use"
 	);
 snippet knex "knex with params"
 	const {rows: $1} = await knex.raw(
-		`
+		\`
 			-- expand
 			-- id: 'coll-1'
 			select
 				*
 			from table
 			where id = :id
-		`,
+		\`,
 		{id: req.params.id},
 	);
 snippet pcl "log in pipe"
@@ -152,14 +152,14 @@ snippet time "console.time"
 snippet co "console log object"
 	console.log('${1:obj}', $1);
 snippet pgfn "postgres fn"
-	/* `
+	/* \`
 		select plus1(102)
-	` */
-	await knex.raw(`
+	\` */
+	await knex.raw(\`
 		create or replace function plus1(s int) returns int as $$
 			select s + 1
 		$$ language sql
-	`);
+	\`);
 snippet pginsert "postgres insert"
 	insert into user_profile (name, email) values
 	('loki', 'loki@email.com'),
@@ -177,7 +177,7 @@ snippet tableext "tableExt"
 				state: "select",
 			},
 		},
-		sql: `
+		sql: \`
 			-- expand
 			-- accountId: 'cus001'
 			select
@@ -186,11 +186,11 @@ snippet tableext "tableExt"
 				1 as actions
 			from user_profile
 			where account_id = :accountId
-		`,
+		\`,
 		sqlParams: {accountId: req.account.id},
 	});
 snippet pgdo "postgres do block"
-	`
+	\`
 		do $$
 			declare some_val int;
 			begin
@@ -198,7 +198,7 @@ snippet pgdo "postgres do block"
 				raise notice 'some_val = (%)', some_val;
 			end
 		$$
-	`
+	\`
 snippet pglog "postgres log"
 	raise notice '$1 = %', $1;
 snippet pgif "postgres if"
@@ -343,17 +343,17 @@ snippet delay "delay def and call"
 	const delay = (ms) => new Promise((resolve) => {setTimeout(resolve, ms)});
 	await delay(500);
 snippet `` "sql test"
-	/* `
+	/* \`
 		-- expand
 		select 1$0
-	` */
+	\` */
 snippet rec "record ob
 	recordObj(${VISUAL})$0
 snippet throw "throw error"
 	/* eslint-disable no-unreachable */
 	throw new Error("$0");
 snippet pgtest "A quick playground for postgres"
-	console.log(`
+	console.log(\`
 		drop table if exists testtbl;
 		create table testtbl (
 			name text,
@@ -361,12 +361,12 @@ snippet pgtest "A quick playground for postgres"
 		);
 		insert into testtbl (name, price) values ('apple', '123');
 		select * from testtbl
-	`);
-	console.log(`
+	\`);
+	console.log(\`
 		alter table testtbl drop column price
-	`);
+	\`);
 snippet pg "pg test with console.log"
-	console.log(`
+	console.log(\`
 		-- expand
 		with recursive t as (
 			select 1 as i
@@ -374,6 +374,6 @@ snippet pg "pg test with console.log"
 			select i + 1 from t where i < 10
 		)
 		select i from t
-	`);
+	\`);
 snippet pry "debugger"
 	debugger;
