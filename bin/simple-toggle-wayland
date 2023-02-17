@@ -1,14 +1,22 @@
 #!/usr/bin/env bash
 
+# CAUTION: due to security issue, gbus eval is disabled by default
+# must enable unsafe mode on every boot
+# lg
+#   global.context.unsafe_mode = true
+
 # simple toggle the first two windows, most likely it's the terminal and chrome
 
 # best fit for ubuntu 22.04 shortcut
 # open Settings > Keyboard Shortcuts > add custom shortcut
 #    key: Ctrl + Space
 #    command: Absolute path of this script
+#
+#    key: win + c
+#    command: Absolute path of this script + " center"
 
-# to get wm class, alt+f2 then execute lg (looking glass)
-# global.context.unsafe_mode = true
+# to test api, alt+f2 then execute lg (looking glass)
+# then explore like global.get_<tab>
 
 # meta_window. title / get_wm_class()
 
@@ -24,6 +32,21 @@ if [[ "$1" = "list" ]]; then
           a.get_workspace().active
         )
         .map(a=>[a.get_wm_class(), a.title])
+      "
+  exit 0
+
+elif [[ "$1" = "center" ]]; then
+  gdbus call \
+    --session \
+    --dest org.gnome.Shell \
+    --object-path /org/gnome/Shell \
+    --method org.gnome.Shell.Eval "
+      const wins = global.get_window_actors().map(a=>a.meta_window)
+        .filter(a=>a.has_focus());
+      const vs = global.get_display().get_size();
+      const ww = wins[0].get_frame_rect().width;
+      const x = (vs[0] - ww) / 2
+      wins[0].move_resize_frame(0, x, 0, ww, vs[1])
       "
   exit 0
 fi
