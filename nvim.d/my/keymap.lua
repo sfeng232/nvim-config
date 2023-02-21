@@ -70,10 +70,7 @@ map("x", "hu", ":")
 map("x", "p", '"_dP', opts)
 map("x", "s", send.send_highlighted_lines, opts)
 map("x", "sf", "<Plug>(comment_toggle_linewise_visual)", opts)
-map("x", "<c-f>", function()
-  vim.cmd([[normal "ay]])
-  vim.cmd("Telescope live_grep default_text=" .. vim.fn.getreg("a"):gsub(" ", "\\ "))
-end)
+map("x", "<c-f>", "<cmd>Telescope grep_string<cr>", opts)
 cancel("x", {">", "<", "<esc>", ":"})
 
 -- Command
