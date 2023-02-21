@@ -1,2 +1,8 @@
 snippet log
-	UE_LOG(LogTemp, Log, TEXT("RHIType: %d, %f, %s"), 1, 0.1, "hello");
+	UE_LOG(LogTemp, Log, TEXT("hello world"))
+snippet logi
+	UE_LOG(LogTemp, Log, TEXT("int: %d"), 1);
+snippet logf
+	UE_LOG(LogTemp, Log, TEXT("float: %f"), 0.1);
+snippet logs
+	UE_LOG(LogTemp, Log, TEXT("string: %s"), "hello");
