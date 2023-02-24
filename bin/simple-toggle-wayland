@@ -46,7 +46,7 @@ elif [[ "$1" = "center" ]]; then
       const vs = global.get_display().get_size();
       const ww = wins[0].get_frame_rect().width;
       const x = (vs[0] - ww) / 2
-      wins[0].move_resize_frame(0, x, 0, ww, vs[1])
+      wins[0].move_resize_frame(0, x, 0, ww, vs[1] - 27)
       "
   exit 0
 fi
