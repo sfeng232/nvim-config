@@ -323,9 +323,16 @@ snippet Async "crocks Async"
 snippet unreach "eslint unreach"
 	/* eslint-disable no-unreachable */
 snippet nav "navframe response"
-	res.nav("${1:framename}", "p-$1", {
+	res.nav("frame-name", "p-mixin-name-here", {
 		mixinArg1: 123,
 	});
+	req.flash("info", "something triggered");
+	req.flash("warn", "warning warning");
+	req.flash("error", "error occurred");
+	res.redirect("back");
+	res.redirect(\`${req.baseUrl}/some-page\`);
+	req.flash("reload-on-navframe-close", true);
+	req.flash("close-uid-prompt-by-navframe", "frame-name");
 snippet readyaml "readyaml"
 	const data = yaml.safeLoad(
 		fs.readFileSync("notes/stripe.invoice.payment_succeeded.txt", "utf8"),
