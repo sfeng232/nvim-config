@@ -329,10 +329,14 @@ snippet nav "navframe response"
 	req.flash("info", "something triggered");
 	req.flash("warn", "warning warning");
 	req.flash("error", "error occurred");
+
+	req.flash("reload-on-navframe-close", "<frame name>;<url (optional)>");
+	req.flash("reload-navframe", "import-accounts");
+	req.flash("close-uid-prompt-by-navframe", "frame-name");
+
 	res.redirect("back");
 	res.redirect(\`${req.baseUrl}/some-page\`);
-	req.flash("reload-on-navframe-close", true);
-	req.flash("close-uid-prompt-by-navframe", "frame-name");
+	res.nav("frame-name");   // no redirection
 snippet readyaml "readyaml"
 	const data = yaml.safeLoad(
 		fs.readFileSync("notes/stripe.invoice.payment_succeeded.txt", "utf8"),
