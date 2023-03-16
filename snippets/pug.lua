@@ -5,6 +5,10 @@ return {
   end, {})),
   s("=t", f(function(args, snip)
     local t = table.concat(snip.env.TM_SELECTED_TEXT, "")
-    return "= t`" .. t:sub(2, -1) .. "`"
+    return "= t`" .. t:sub(1, -1) .. "`"
+  end, {})),
+  s("t", f(function(args, snip)
+    local t = table.concat(snip.env.TM_SELECTED_TEXT, "")
+    return "t`" .. t .. "`"
   end, {}))
 }
