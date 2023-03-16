@@ -14,6 +14,7 @@ if not ok3 then
 end
 
 require("luasnip.loaders.from_snipmate").lazy_load()
+require("luasnip.loaders.from_lua").load({paths = "~/loki/nvim-config/snippets"})
 
 --   פּ ﯟ   some other good icons
 local kind_icons = {
@@ -43,6 +44,11 @@ local kind_icons = {
   Operator = "",
   TypeParameter = "",
 }
+
+local ls = require('luasnip')
+ls.config.set_config({
+  store_selection_keys = 'c',
+})
 
 cmp.setup {
   -- completion = {
