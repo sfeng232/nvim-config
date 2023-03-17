@@ -47,7 +47,7 @@ local kind_icons = {
 
 local ls = require('luasnip')
 ls.config.set_config({
-  store_selection_keys = 'c',
+  store_selection_keys = '<tab>',
 })
 
 cmp.setup {
