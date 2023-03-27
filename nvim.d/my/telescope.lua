@@ -5,6 +5,17 @@ end
 
 local actions = require "telescope.actions"
 
+local style = {
+  theme = "dropdown",
+  hidden = true,
+  layout_strategy = 'vertical',
+  layout_config = {
+    height = 0.99,
+    width = 0.8,
+  },
+  borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+}
+
 telescope.setup {
   defaults = {
     file_ignore_patterns = {
@@ -49,14 +60,13 @@ telescope.setup {
     },
   },
   pickers = {
-    find_files = {
-      theme = "dropdown",
-      hidden = true,
-    },
+    find_files = style,
+    grep_string = style,
+    live_grep = style,
     git_status = {
       theme = "dropdown",
       layout_strategy = 'vertical',
-      layout_config = { height = 0.9, width = 0.9 },
+      layout_config = { height = 0.99, width = 0.8 },
       borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
       mappings = {
         i = {
