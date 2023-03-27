@@ -54,6 +54,10 @@ telescope.setup {
       hidden = true,
     },
     git_status = {
+      theme = "dropdown",
+      layout_strategy = 'vertical',
+      layout_config = { height = 0.9, width = 0.9 },
+      borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
       mappings = {
         i = {
           ["<m-r>"] = function(prompt_bufnr)
