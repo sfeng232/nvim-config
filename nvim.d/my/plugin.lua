@@ -71,7 +71,6 @@ packer.startup(function(use, use_rocks)
   use 'kvrohit/substrata.nvim'
   use 'marko-cerovac/material.nvim'
   use 'norcalli/nvim-colorizer.lua'
-  use 'digitaltoad/vim-pug'
 
   use {'yamatsum/nvim-cursorline', config = function()
     vim.g.cursorword_highlight = false
