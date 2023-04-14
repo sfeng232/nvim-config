@@ -171,7 +171,8 @@ snippet tableext "tableExt"
 		options: {
 			id: "t",
 			sortable: ["name", "state"],
-			sort: ["_created_at", "asc"],
+			sort: ["_created_at", "desc"],
+			sortIdCol: ["_created_at", "desc"],
 			filterable: {
 				name: "freetext",
 				state: "select",
