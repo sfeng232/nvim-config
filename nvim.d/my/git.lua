@@ -56,7 +56,8 @@ gitsigns.setup {
     map('n', 'gk', gs.prev_hunk)
     map('n', 'gr', gs.reset_hunk)
     map('n', 'gh', gs.preview_hunk)
-    map('n', 'gd', gs.diffthis)
+    --[[ map('n', 'gd', gs.diffthis) ]]
+    map('n', 'gd', ":call system('git difftool -t diffuse -y -- ' . expand('%'))<cr>")
     -- stage/unstage hunk with <leader>g + s/u
     map("n", "<leader>gk", ":call system('gitk ' . expand('%'))<cr>")    -- only the current file
     map("n", "<leader>gkk", ":call system('gitk')<cr>")                  -- the whole repo
