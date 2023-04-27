@@ -7,6 +7,7 @@ local lib = require("nvim-tree.lib")
 local view = require("nvim-tree.view")
 local open_file = require('nvim-tree.actions.node.open-file')
 
+-- https://github.com/nvim-tree/nvim-tree.lua/wiki/Migrating-To-on_attach
 local function on_attach(bufnr)
   local api = require('nvim-tree.api')
 
