@@ -155,6 +155,11 @@ packer.startup(function(use, use_rocks)
   -- noremap <Leader>t# :Tabularize /#<cr>
   -- noremap <Leader>t> :Tabularize /=><cr>
 
+  use {
+    'glacambre/firenvim',
+    run = function() vim.fn['firenvim#install'](0) end
+  }
+
   use {'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim'}
 
   use({
