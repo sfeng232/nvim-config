@@ -115,14 +115,3 @@ Optional for various LSP servers
       asciinema rec --overwrite test.json
       asciinema play test.json
       cat test.json | npx svg-term --out test.svg
-
-firenvim (embed nvim in all texture in firefox)
-  sudo snap remove firefox
-  sudo add-apt-repository ppa:mozillateam/ppa
-  sudo vi /etc/apt/preferences.d/mozilla-firefox
-    Package: *
-    Pin: release o=LP-PPA-mozillateam
-    Pin-Priority: 1001
-  sudo vi /etc/apt/apt.conf.d/51unattended-upgrades-firefox
-    Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";
-  sudo apt install firefox
