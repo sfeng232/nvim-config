@@ -14,4 +14,13 @@ return {
 
   -- WhenFollowedBySpace (default), Never, Always
   -- allow_square_glyphs_to_overflow_width = "Never",
+  --
+
+  keys = {
+    {
+      key = 'n',
+      mods = 'SHIFT|CTRL',
+      action = wezterm.action.ToggleFullScreen,
+    }
+  }
 }
