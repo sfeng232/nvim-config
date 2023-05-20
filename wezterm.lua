@@ -22,5 +22,12 @@ return {
       mods = 'SHIFT|CTRL',
       action = wezterm.action.ToggleFullScreen,
     }
+  },
+
+  window_padding = {
+    left = 8,
+    right = 8,
+    top = 0,
+    bottom = 0,
   }
 }
