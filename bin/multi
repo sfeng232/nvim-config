@@ -2,7 +2,7 @@
 
 if [[ "$1" = "" ]]; then
   echo "Expected a config file path but missing"
-  echo "e.g. multi config.json"
+  echo "e.g. multi config.yaml"
   exit 1
 fi
 

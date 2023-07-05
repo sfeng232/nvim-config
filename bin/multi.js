@@ -1,17 +1,13 @@
 #!/usr/bin/env node
 
-// sudo npm install -g ramda colors
+// sudo npm install -g ramda colors yaml
 // NODE_PATH=$(npm root -g) .devbase/bin/multi.js
-
-if (!process.env.NODE_PATH) {
-  console.log(123);
-  return;
-}
 
 const {spawn} = require("child_process");
 const R = require("ramda");
 const colors = require("colors");
 const fs = require("fs");
+const YAML = require("yaml");
 
 colors.enable()
 
@@ -65,13 +61,13 @@ const printLines = (tag, lines) => {
   }
 };
 
-const tasks = JSON.parse(fs.readFileSync(process.argv[2]).toString());
+const tasks = YAML.parse(fs.readFileSync(process.argv[2]).toString());
 
 const fn1 = async () => {
   const ps = R.addIndex(R.map)(
     (task, idx) => {
       const tag = colorFn[idx](task.tag);
-      return spawnP(task.cmd, {}, (lines) => {
+      return spawnP(task.cmd.replaceAll("\n", ""), {}, (lines) => {
         printLines(tag, lines);
       })
     }
