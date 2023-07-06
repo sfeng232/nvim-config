@@ -43,7 +43,7 @@ const spawnP = (cli, options, fn) =>
     });
 
     proc.on('close', (code) => {
-      resolve(code);
+      resolve(code === 0);
     });
   });
 
@@ -85,31 +85,41 @@ for (const [idx, task] of tasks.entries()) {
 
 const findTask = tag => R.find(R.propEq(tag, "tag"), tasks);
 
-const isRunnable = (task) => {
-  if (task.state !== "pending") {
-    return false;
+// validate all after tag exists
+for (const task of tasks) {
+  for (const afterTag of task.after || []) {
+    if (!findTask(afterTag)) {
+      console.error(`${task.tag} depends on ${afterTag} which doesn't exists.`);
+      process.exit(1);
+    }
   }
-  const allCompleted = R.all(
-    (afterTag) => findTask(afterTag).state === "completed"
-  )(task.after || [])
-  if (!allCompleted) {
-    return false;
-  }
-  return true;
-};
+}
 
 const runAllRunnable = () => {
   R.map(
     async (task) => {
-      if (!isRunnable(task)) {
+      if (task.state !== "pending") {
         return false;
       }
+      const states = R.map((afterTag) => findTask(afterTag).state, task.after || []);
+      if (R.any(R.equals("failed"), states)) {
+        task.state = "skipped";
+        printLines(task.display, "- skipped -".gray);
+        return false;
+      }
+      if (!R.all(R.equals("completed"), states)) return false;
+
       task.state = "running";
-      await spawnP(task.cmd.replaceAll("\n", ""), {}, (lines) => {
+      const isSucceeded = await spawnP(task.cmd.replaceAll("\n", ""), {}, (lines) => {
         printLines(task.display, lines);
       })
-      task.state = "completed";
-      printLines(task.display, "- completed -".gray);
+      if (isSucceeded) {
+        task.state = "completed";
+        printLines(task.display, "- completed -".gray);
+      } else {
+        task.state = "failed";
+        printLines(task.display, "- failed -".gray);
+      }
       runAllRunnable();
     }
   )(tasks);
