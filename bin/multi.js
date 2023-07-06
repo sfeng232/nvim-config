@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-// sudo npm install -g ramda colors yaml
+// sudo npm install -g ramda colors yaml node-pty
 // NODE_PATH=$(npm root -g) .devbase/bin/multi.js
 
-const {spawn} = require("child_process");
+const {spawn} = require("node-pty");
 const R = require("ramda");
 const colors = require("colors");
 const fs = require("fs");
@@ -34,15 +34,11 @@ const spawnP = (cli, options, fn) =>
   new Promise((resolve, reject) => {
     const proc = spawn("bash", ["-c", cli]);
 
-    proc.stdout.on('data', (data) => {
+    proc.on('data', (data) => {
       fn(`${data}`);
     });
 
-    proc.stderr.on('data', (data) => {
-      fn(`${data}`);
-    });
-
-    proc.on('close', (code) => {
+    proc.on('exit', (code) => {
       resolve(code === 0);
     });
   });
