@@ -52,7 +52,7 @@ const spawnP = (cli, options, fn) =>
 /* eslint-disable guard-for-in */
 const printLines = (tag, lines) => {
   const lls = R.compose(
-    R.map(line => `${tag}| ${line}`),
+    R.map(line => `${tag}${line}`),
     R.split("\n"),
     R.trim,
   )(lines);
@@ -61,19 +61,58 @@ const printLines = (tag, lines) => {
   }
 };
 
-const tasks = YAML.parse(fs.readFileSync(process.argv[2]).toString());
+const filepath = process.argv[2];
+if (!fs.existsSync(filepath)) {
+  console.log(`${filepath} do not exists.`);
+  process.exit();
+}
+const tasks = YAML.parse(fs.readFileSync(filepath).toString());
 
-const fn1 = async () => {
-  const ps = R.addIndex(R.map)(
-    (task, idx) => {
-      const tag = colorFn[idx](task.tag);
-      return spawnP(task.cmd.replaceAll("\n", ""), {}, (lines) => {
-        printLines(tag, lines);
+const tagMaxLen = R.compose(
+  R.apply(Math.max),
+  R.map(R.length),
+  R.pluck("tag"),
+)(tasks);
+
+const sep = " | ".gray
+
+/* eslint-disable fp/no-loops */
+/* eslint-disable no-restricted-syntax */
+for (const [idx, task] of tasks.entries()) {
+  task.display = colorFn[idx](task.tag.padEnd(tagMaxLen, " ")) + sep;
+  task.state = "pending";
+}
+
+const findTask = tag => R.find(R.propEq(tag, "tag"), tasks);
+
+const isRunnable = (task) => {
+  if (task.state !== "pending") {
+    return false;
+  }
+  const allCompleted = R.all(
+    (afterTag) => findTask(afterTag).state === "completed"
+  )(task.after || [])
+  if (!allCompleted) {
+    return false;
+  }
+  return true;
+};
+
+const runAllRunnable = () => {
+  R.map(
+    async (task) => {
+      if (!isRunnable(task)) {
+        return false;
+      }
+      task.state = "running";
+      await spawnP(task.cmd.replaceAll("\n", ""), {}, (lines) => {
+        printLines(task.display, lines);
       })
+      task.state = "completed";
+      printLines(task.display, "- completed -".gray);
+      runAllRunnable();
     }
   )(tasks);
-  await Promise.all(ps);
 };
-fn1().then(() => console.log("multi.js ended successfully"));
 
-// vi: ft=javascript
+runAllRunnable();
