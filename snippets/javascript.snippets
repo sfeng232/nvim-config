@@ -395,3 +395,13 @@ snippet test "jest test"
 	});
 snippet expect "jest expect"
 	expect(1 + 1).toBe(2);
+snippet offon "off then on"
+	\$pane
+		.off("click.delrecords", "[data-cmdb-delete-records]")
+		.on("click.delrecords", "[data-cmdb-delete-records]", async (e) => {
+			if (e.which !== 1) {
+				return;
+			}
+			const \$btn = \$(e.currentTarget);
+			return false;
+		});
