@@ -146,8 +146,8 @@ snippet onChange "naf on click"
 	onChange("add", async (data, $node) => {
 	});
 snippet time "console.time"
-	console.time("$1");
-	${VISUAL}
+	console.time("${1:mytimer}");
+	${VISUAL}$0
 	console.timeEnd("$1");
 snippet co "console log object"
 	console.log('${1:obj}', $1);
