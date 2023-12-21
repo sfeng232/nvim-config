@@ -52,6 +52,7 @@ map("n", "c*", '*Ncgn', opts)        -- c* to edit word under cursor, repeatable
 map("n", "d*", '*Ndgn', opts)
 map("n", "c.", '<cmd>let @/=@"<cr>/<cr>cgn<c-r>.<esc>', opts)       -- c. to make the last edit repeatable by dot
 map("n", "d.", '<cmd>let @/=@"<cr>/<cr>dgn<c-r>.<esc>', opts)
+map("n", "rz", console_pane_flag_toggle, opts)
 map("n", "<leader>u", function()
   require("luasnip.loaders.from_snipmate").edit_snippet_files()
 end, opts)
