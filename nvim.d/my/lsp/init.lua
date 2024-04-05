@@ -1,7 +1,10 @@
 local ok1, _ = pcall(require, "lspconfig")
 if not ok1 then return end
 
-local ok2, lsp_installer = pcall(require, "nvim-lsp-installer")
+-- local ok2, lsp_installer = pcall(require, "nvim-lsp-installer")
+-- if not ok2 then return end
+
+local ok2, mason = pcall(require, "mason")
 if not ok2 then return end
 
 local ok3, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
@@ -11,6 +14,8 @@ local ok4, null_ls = pcall(require, "null-ls")
 if not ok4 then return end
 
 --[[ tail -f  ~/.local/state/nvim/lsp.log ]]
+
+mason.setup()
 
 local on_attach = function(client, bufnr)
   local opts = { noremap = true, silent = true }
@@ -22,60 +27,60 @@ local on_attach = function(client, bufnr)
   map(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
 end
 
-lsp_installer.on_server_ready(function(server)
-  local opts = {
-    on_attach = on_attach,
-    capabilities = cmp_nvim_lsp.default_capabilities(),
-  }
-
-  -- refs for all LSP servers
-  -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-  if (server.name == "grammarly") then
-    opts.filetypes = { "markdown", "rst", "html", "lokinote" }
-  end
-
-  -- if (server.name == "sqls") then
-  --   opts.settings = {
-  --     sqls = {
-  --       lowercaseKeywords = false,
-  --       connections = {
-  --         {
-  --           driver = 'postgresql',
-  --           dataSourceName = 'host=127.0.0.1 port=15432 user=farmweb password=farmweb321 dbname=farmweb',
-  --         }
-  --       }
-  --     }
-  --   }
-  -- end
-
-  if server.name == "ltex" then
-    opts.filetypes = { "lokinote", "bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb", "tex" }
-  end
-
-  if server.name == "tsserver" then
-    local tsserver_opts = require("my.lsp.tsserver")
-    opts = vim.tbl_deep_extend("keep", tsserver_opts, opts)
-  end
-
-  if server.name == "jsonls" then
-    local jsonls_opts = require("my.lsp.jsonls")
-    opts = vim.tbl_deep_extend("force", jsonls_opts, opts)
-  end
-
-  if server.name == "sumneko_lua" then
-    local sumneko_opts = require("my.lsp.sumneko_lua")
-    opts = vim.tbl_deep_extend("force", sumneko_opts, opts)
-  end
-
-  if server.name == "pyright" then
-    local pyright_opts = require("my.lsp.pyright")
-    opts = vim.tbl_deep_extend("force", pyright_opts, opts)
-  end
-
-  -- This setup() function is exactly the same as lspconfig's setup function.
-  -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-  server:setup(opts)
-end)
+-- lsp_installer.on_server_ready(function(server)
+--   local opts = {
+--     on_attach = on_attach,
+--     capabilities = cmp_nvim_lsp.default_capabilities(),
+--   }
+--
+--   -- refs for all LSP servers
+--   -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+--   if (server.name == "grammarly") then
+--     opts.filetypes = { "markdown", "rst", "html", "lokinote" }
+--   end
+--
+--   -- if (server.name == "sqls") then
+--   --   opts.settings = {
+--   --     sqls = {
+--   --       lowercaseKeywords = false,
+--   --       connections = {
+--   --         {
+--   --           driver = 'postgresql',
+--   --           dataSourceName = 'host=127.0.0.1 port=15432 user=farmweb password=farmweb321 dbname=farmweb',
+--   --         }
+--   --       }
+--   --     }
+--   --   }
+--   -- end
+--
+--   if server.name == "ltex" then
+--     opts.filetypes = { "lokinote", "bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb", "tex" }
+--   end
+--
+--   if server.name == "tsserver" then
+--     local tsserver_opts = require("my.lsp.tsserver")
+--     opts = vim.tbl_deep_extend("keep", tsserver_opts, opts)
+--   end
+--
+--   if server.name == "jsonls" then
+--     local jsonls_opts = require("my.lsp.jsonls")
+--     opts = vim.tbl_deep_extend("force", jsonls_opts, opts)
+--   end
+--
+--   if server.name == "sumneko_lua" then
+--     local sumneko_opts = require("my.lsp.sumneko_lua")
+--     opts = vim.tbl_deep_extend("force", sumneko_opts, opts)
+--   end
+--
+--   if server.name == "pyright" then
+--     local pyright_opts = require("my.lsp.pyright")
+--     opts = vim.tbl_deep_extend("force", pyright_opts, opts)
+--   end
+--
+--   -- This setup() function is exactly the same as lspconfig's setup function.
+--   -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+--   server:setup(opts)
+-- end)
 
 local signs = {
   { name = "DiagnosticSignError", text = "" },

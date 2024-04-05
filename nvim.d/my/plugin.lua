@@ -97,7 +97,8 @@ packer.startup(function(use, use_rocks)
 
   -- LSP
   use "neovim/nvim-lspconfig"
-  use "williamboman/nvim-lsp-installer"
+  use "williamboman/mason.nvim"
+  -- use "williamboman/nvim-lsp-installer"
   use "b0o/schemastore.nvim"
   use "jose-elias-alvarez/null-ls.nvim"
 
