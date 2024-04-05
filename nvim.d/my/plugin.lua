@@ -67,6 +67,9 @@ packer.startup(function(use, use_rocks)
   use "tomtom/tlib_vim"                 -- provided string#Strip, used in the lokinote bullet style switching shortcut
   use "rcarriga/nvim-notify"
 
+  -- ai code completion
+  use 'Exafunction/codeium.vim'
+
   -- which key
   use "folke/which-key.nvim"
 
