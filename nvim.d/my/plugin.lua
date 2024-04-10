@@ -99,8 +99,11 @@ packer.startup(function(use, use_rocks)
   use "saadparwaiz1/cmp_luasnip"
 
   -- LSP
-  use "neovim/nvim-lspconfig"
-  use "williamboman/mason.nvim"
+  use {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
+  }
   -- use "williamboman/nvim-lsp-installer"
   use "b0o/schemastore.nvim"
   use "jose-elias-alvarez/null-ls.nvim"

@@ -13,9 +13,20 @@ if not ok3 then return end
 local ok4, null_ls = pcall(require, "null-ls")
 if not ok4 then return end
 
+local ok5, masonlsp = pcall(require, "mason-lspconfig")
+if not ok5 then return end
+
 --[[ tail -f  ~/.local/state/nvim/lsp.log ]]
 
 mason.setup()
+masonlsp.setup {
+  ensure_installed = { "eslint", "tsserver", "bashls", "pyright" },
+}
+
+require("lspconfig").eslint.setup {}
+require("lspconfig").tsserver.setup {}
+require("lspconfig").bashls.setup {}
+require("lspconfig").pyright.setup {}
 
 local on_attach = function(client, bufnr)
   local opts = { noremap = true, silent = true }
