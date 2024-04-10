@@ -24,6 +24,7 @@ vim.g.cursorline_timeout = 800
 local ok2, ibl = pcall(require, "ibl")
 ibl.setup {
   indent = { char = "▏" },
+  scope = { enabled = false },
 }
 
 -- vim.g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
