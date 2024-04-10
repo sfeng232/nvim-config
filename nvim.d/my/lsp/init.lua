@@ -28,15 +28,15 @@ require("lspconfig").tsserver.setup {}
 require("lspconfig").bashls.setup {}
 require("lspconfig").pyright.setup {}
 
-local on_attach = function(client, bufnr)
-  local opts = { noremap = true, silent = true }
-  local map = vim.api.nvim_buf_set_keymap
-  map(bufnr, "n", "<c-h>", '<cmd>lua vim.diagnostic.goto_prev({ float = false })<cr>', opts)
-  map(bufnr, "n", "<c-l>", '<cmd>lua vim.diagnostic.goto_next({ float = false })<cr>', opts)
-  map(bufnr, "n", "<c-m-]>", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  map(bufnr, "n", "<c-]>", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  map(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-end
+-- local on_attach = function(client, bufnr)
+--   local opts = { noremap = true, silent = true }
+--   local map = vim.api.nvim_buf_set_keymap
+--   map(bufnr, "n", "<c-h>", '<cmd>lua vim.diagnostic.goto_prev({ float = false })<cr>', opts)
+--   map(bufnr, "n", "<c-l>", '<cmd>lua vim.diagnostic.goto_next({ float = false })<cr>', opts)
+--   map(bufnr, "n", "<c-m-]>", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+--   map(bufnr, "n", "<c-]>", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+--   map(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+-- end
 
 -- lsp_installer.on_server_ready(function(server)
 --   local opts = {
