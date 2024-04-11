@@ -34,6 +34,9 @@ snippet if "if"
 snippet for "for .. in .."
 	for ${1:i} in ${2:pool}:
 		$0
+snippet for "for .. in .. indexed"
+	for idx, x in enumerate(xs):
+		$0
 snippet cl
 	import logging
 	_logger = logging.getLogger(__name__)
