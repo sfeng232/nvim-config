@@ -68,7 +68,28 @@ packer.startup(function(use, use_rocks)
   use "rcarriga/nvim-notify"
 
   -- ai code completion
-  use 'Exafunction/codeium.vim'
+  -- use 'Exafunction/codeium.vim'
+  use {
+    'luozhiya/fittencode.nvim',
+    config = function()
+      require('fittencode').setup({
+        inline_completion = {
+          -- Enable inline code completion.
+          enable = true,
+        },
+        -- Set the mode of the completion.
+        -- Available options:
+        -- - 'inline' (default)
+        -- - 'source'
+        completion_mode = 'inline',
+        use_default_keymaps = true,
+        log = {
+          level = vim.log.levels.WARN,
+        },
+      })
+      vim.opt.updatetime = 200
+    end,
+  }
 
   -- which key
   use "folke/which-key.nvim"
