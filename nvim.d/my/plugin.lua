@@ -91,6 +91,26 @@ packer.startup(function(use, use_rocks)
     end,
   }
 
+
+  -- curl 127.0.0.1:28080/generate \
+  --   -X POST \
+  --   -d '{"inputs":"one plus three equal","parameters":{"max_new_tokens":256}}' \
+  --   -H 'Content-Type: application/json'
+  -- use {
+  --   'huggingface/llm.nvim',
+  --   config = function()
+  --     require('llm').setup({
+  --       model = "wenbopan/Faro-Yi-9B-DPO",
+  --       backend = "tgi",
+  --       url = "http://127.0.0.1:28080/generate",
+  --       lsp = {
+  --         bin_path = vim.api.nvim_call_function("stdpath", { "data" }) .. "/mason/bin/llm-ls",
+  --       },
+  --       tokenizer = nil,
+  --     })
+  --   end
+  -- }
+
   -- which key
   use "folke/which-key.nvim"
 
