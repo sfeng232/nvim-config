@@ -91,7 +91,6 @@ packer.startup(function(use, use_rocks)
     end,
   }
 
-
   -- curl 127.0.0.1:28080/generate \
   --   -X POST \
   --   -d '{"inputs":"one plus three equal","parameters":{"max_new_tokens":256}}' \
@@ -100,13 +99,36 @@ packer.startup(function(use, use_rocks)
   --   'huggingface/llm.nvim',
   --   config = function()
   --     require('llm').setup({
-  --       model = "wenbopan/Faro-Yi-9B-DPO",
   --       backend = "tgi",
   --       url = "http://127.0.0.1:28080/generate",
-  --       lsp = {
-  --         bin_path = vim.api.nvim_call_function("stdpath", { "data" }) .. "/mason/bin/llm-ls",
+  --       request_body = {
+  --         parameters = {
+  --           temperature = 0.2,
+  --           top_p = 0.95,
+  --         }
   --       },
-  --       tokenizer = nil,
+  --       -- tokens_to_clear = { "<|endoftext|>" },
+  --       -- fim = {
+  --       --   enabled = true,
+  --       --   prefix = "<fim_prefix>",
+  --       --   middle = "<fim_middle>",
+  --       --   suffix = "<fim_suffix>",
+  --       -- },
+  --       tokens_to_clear = { "<EOT>" },
+  --       fim = {
+  --         enabled = true,
+  --         prefix = "<PRE> ",
+  --         middle = " <MID>",
+  --         suffix = " <SUF>",
+  --       },
+  --       -- model = "codellama/CodeLlama-7b-hf",
+  --       context_window = 4096,
+  --       -- tokenizer = {
+  --       --   repository = "codellama/CodeLlama-7b-hf",
+  --       -- },
+  --       -- lsp = {
+  --       --   bin_path = vim.api.nvim_call_function("stdpath", { "data" }) .. "/mason/bin/llm-ls",
+  --       -- },
   --     })
   --   end
   -- }
