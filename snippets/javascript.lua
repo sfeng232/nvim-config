@@ -15,12 +15,12 @@ return {
   end, {})),
 
   s("cl", {
-    t("console.log(`"),
+    t("console.log(\""),
     f(function()
       return randomString(4)
     end, {}),
-    t(": ${"),
+    t(":\", "),
     i(1),
-    t("}`);"),
+    t(");"),
   })
 }
