@@ -186,7 +186,7 @@ null_ls.setup {
   debug = false,
   sources = {
     formatting.prettier.with { extra_args = { } },
-    formatting.black.with { extra_args = { "--fast" } },
+    -- formatting.black.with { extra_args = { "--fast" } },
     -- formatting.yapf,
     formatting.stylua,
     -- diagnostics.flake8,
