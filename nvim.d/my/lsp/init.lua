@@ -20,13 +20,30 @@ if not ok5 then return end
 
 mason.setup()
 masonlsp.setup {
-  ensure_installed = { "eslint", "tsserver", "bashls", "pyright" },
+  ensure_installed = { "eslint", "bashls", "pyright" },
 }
 
 require("lspconfig").eslint.setup {}
-require("lspconfig").tsserver.setup {}
+-- require("lspconfig").tsserver.setup {}
 require("lspconfig").bashls.setup {}
-require("lspconfig").pyright.setup {}
+-- require("lspconfig").pyright.setup {}
+
+-- pip install ruff_lsp
+-- https://github.com/astral-sh/ruff-lsp
+require("lspconfig").ruff_lsp.setup {
+  on_attach = function(client, bufnr)
+		if client.supports_method("textDocument/formatting") then
+			vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				group = augroup,
+				buffer = bufnr,
+				callback = function()
+					vim.lsp.buf.format()
+				end,
+			})
+		end
+	end,
+}
 
 -- local on_attach = function(client, bufnr)
 --   local opts = { noremap = true, silent = true }
