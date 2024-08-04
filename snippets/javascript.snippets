@@ -218,8 +218,8 @@ snippet table "new table"
 	await knex.schema.createTable("$1", (table) => {
 		table.string("id").primary();
 	});
-	await autoId("$1");
-	await autoUpdatedAt("$1");
+	await KH.autoId("$1");
+	await KH.autoUpdatedAt("$1");
 	// down
 	await knex.schema.dropTableIfExists("$1");
 snippet cond "cond"
