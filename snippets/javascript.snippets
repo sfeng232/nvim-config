@@ -415,3 +415,9 @@ snippet return "res.return"
       "close-uid-prompt-by-navframe": "new-k8s-job",
 		},
 	});
+snippet logChanges "automigrate log changes"
+	logChanges: {
+		name: ["name"],
+		exclude: ["id", "updated_at", "created_at"],
+		sensitive: [],
+	},
