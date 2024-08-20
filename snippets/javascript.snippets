@@ -197,6 +197,10 @@ snippet pgdo "postgres do block"
 			end
 		$$
 	\`
+snippet /*` "postgres testing block"
+	/* \`
+		select * from user_profile
+	\` */
 snippet pglog "postgres log"
 	raise warning '$1 = %', $1;
 snippet pgif "postgres if"
