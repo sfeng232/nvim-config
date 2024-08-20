@@ -198,7 +198,7 @@ snippet pgdo "postgres do block"
 		$$
 	\`
 snippet pglog "postgres log"
-	raise notice '$1 = %', $1;
+	raise warning '$1 = %', $1;
 snippet pgif "postgres if"
 	if a then
 	elsif b then
