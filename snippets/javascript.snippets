@@ -167,12 +167,11 @@ snippet tableext "tableExt"
 		req,
 		options: {
 			id: "t",
-			sortable: ["name", "state"],
+			sortable: ["-"],
 			sort: ["_created_at", "desc"],
 			sortIdCol: ["_created_at", "desc"],
 			filterable: {
-				name: "freetext",
-				state: "select",
+				_default: "freetext",
 			},
 		},
 		sql: \`
